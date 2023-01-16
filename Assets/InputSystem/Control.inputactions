@@ -27,34 +27,12 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "cf99c261-e8c9-4774-bb68-a9dcdb32d661",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "TouchPress",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "62483e04-2514-477b-b8e9-6239cadd04eb",
                     "path": "<Touchscreen>/Press",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "TouchPress",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b27cae6a-9776-4a04-a534-ea58c4084ecc",
-                    "path": "<Mouse>/position",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Drag",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

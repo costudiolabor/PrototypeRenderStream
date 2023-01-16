@@ -5,13 +5,13 @@ using UnityEngine;
 [Serializable]
 public class UiController 
 {
-    [SerializeField] private View _view;
+    [SerializeField] private View view;
 
     public event Action ClickButtonDeleteEvent;
 
-    public UiController(View _view)
+    public UiController(View view)
     {
-        _view.ClickButtonDeleteEvent += ButtonClickDelete;
+        view.ClickButtonDeleteEvent += ButtonClickDelete;
     }
 
     private void ButtonClickDelete()

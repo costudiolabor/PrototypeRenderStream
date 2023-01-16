@@ -3,11 +3,11 @@ using UnityEngine;
 public class Entry : MonoBehaviour
 {
 
-    [SerializeField] private View _viewPrefab;
-    [SerializeField] private View _view;
+    [SerializeField] private View viewPrefab;
+    [SerializeField] private View view;
 
-    [SerializeField] private UiController _uiController;
-    [SerializeField] private DrawerFigure _drawerFigure;
+    [SerializeField] private UiController uiController;
+    [SerializeField] private DrawerFigure drawerFigure;
 
 
     private InputManager _inputManager;
@@ -18,15 +18,15 @@ public class Entry : MonoBehaviour
         _inputManager.Init();
         _inputManager.OnEnable();
 
-        _view = Instantiate(_viewPrefab);
-        _uiController = new UiController(_view);
-        _drawerFigure = new DrawerFigure(Camera.main);
+        view = Instantiate(viewPrefab);
+        uiController = new UiController(view);
+        drawerFigure = new DrawerFigure(Camera.main);
 
-        _uiController.ClickButtonDeleteEvent += _drawerFigure.DeleteFigure;
+        uiController.ClickButtonDeleteEvent += drawerFigure.DeleteFigure;
         
-        _inputManager.StartTouchEvent += _drawerFigure.StartTouch;
-        _inputManager.CancelTouchEvent += _drawerFigure.CancelTouch;
-        _inputManager.DragTouchEvent += _drawerFigure.Drag;
+        _inputManager.StartTouchEvent += drawerFigure.StartTouch;
+        _inputManager.CancelTouchEvent += drawerFigure.CancelTouch;
+        _inputManager.DragTouchEvent += drawerFigure.Drag;
     }
 
     private void OnDisable()

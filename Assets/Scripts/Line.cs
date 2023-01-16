@@ -4,14 +4,14 @@ using UnityEngine;
 [Serializable]
 public class Line : Figure
 {
-    [SerializeField] private Material _materialLine;
-    [SerializeField] private float _deltaPosition = 3.1f;
+    [SerializeField] private Material materialLine;
+    [SerializeField] private float deltaPosition = 3.1f;
 
-    private int minCountPoint = 4;
+    private int _minCountPoint = 4;
 
     private LineRenderer _lineRenderer;
     private Vector2 _lastPosition;
-    private float _currentdeltaPosition;
+    private float _currentDeltaPosition;
 
     public Line(Vector3 position)
     {
@@ -21,7 +21,7 @@ public class Line : Figure
     public void CreateGameObject(Vector3 position)
     {
         _lineRenderer = new GameObject("Line").AddComponent<LineRenderer>();
-        _lineRenderer.material = _materialLine;
+        _lineRenderer.material = materialLine;
         _lineRenderer.positionCount = 2;
         _lineRenderer.startWidth = 0.5f;
         _lineRenderer.endWidth = 0.5f;
@@ -34,19 +34,19 @@ public class Line : Figure
 
     public override void Draw(Vector3 position)
     {
-        _currentdeltaPosition = Vector3.Distance(_lastPosition, position);
+        _currentDeltaPosition = Vector3.Distance(_lastPosition, position);
 
-        if (_currentdeltaPosition > _deltaPosition)
-        {
-            _lastPosition = position;
-            _lineRenderer.positionCount++;
-            _lineRenderer.SetPosition(_lineRenderer.positionCount - 1, position);
-        }
+        if (!(_currentDeltaPosition > deltaPosition)) return;
+        _lastPosition = position;
+        var positionCount = _lineRenderer.positionCount;
+        positionCount++;
+        _lineRenderer.positionCount = positionCount;
+        _lineRenderer.SetPosition(positionCount - 1, position);
     }
 
     public override bool EndDraw()
     {
-        if (_lineRenderer.positionCount < minCountPoint)
+        if (_lineRenderer.positionCount < _minCountPoint)
         {
             DestroyObject();
             return false;
@@ -59,6 +59,7 @@ public class Line : Figure
 
     public override void DestroyObject()
     {
+        if (!_lineRenderer.gameObject) return;
         UnityEngine.Object.Destroy(_lineRenderer.gameObject);
     }
 

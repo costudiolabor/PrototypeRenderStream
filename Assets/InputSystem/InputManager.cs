@@ -16,7 +16,7 @@ public class InputManager
 
         control.Touch.TouchPress.started += ctx => StartTouch(control.Touch.Drag.ReadValue<Vector2>());
         control.Touch.TouchPress.canceled += ctx => CancelTouch();
-        control.Touch.Drag.performed += ctx => Drag(ctx);
+        control.Touch.Drag.performed += Drag;
     }
 
     public void Drag(InputAction.CallbackContext context)
@@ -27,7 +27,7 @@ public class InputManager
 
     public void StartTouch(Vector2 value)
     {
-        Debug.Log("Start");
+        Debug.Log("Start " + value);
         StartTouchEvent?.Invoke(value);
     }
 

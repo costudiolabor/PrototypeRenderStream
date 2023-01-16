@@ -5,71 +5,64 @@ using System.Collections.Generic;
 [System.Serializable]
 public class DrawerFigure
 {
-    [SerializeField] private Camera _cameraMain;
-    [SerializeField] private float _offSetZ = 0.2f;
+    [SerializeField] private float offSetZ = 0.2f;
 
+    private Camera _cameraMain;
     private bool _isHitRayCast;
-    private Figure currentFigure;
-    private Stack<Figure> figures = new Stack<Figure>();
+    private Figure _currentFigure;
+    private Stack<Figure> _figures = new Stack<Figure>();
 
-    public DrawerFigure(Camera _cameraMain)
+    public DrawerFigure(Camera cameraMain)
     {
-        this._cameraMain = _cameraMain;
+        Debug.Log("DrawerFigure");
+        this._cameraMain = cameraMain;
     }
 
     public void StartTouch(Vector2 touchPosition)
     {
         Vector3 position = GetPositionPlace(touchPosition);
         if (!_isHitRayCast) return;
-        currentFigure = new Line(position);
-        figures.Push(currentFigure);
+        _currentFigure = new Line(position);
+        _figures.Push(_currentFigure);
     }
 
     public void CancelTouch()
     {
-        if (figures.Count > 0)
-        {
-            Figure figure = figures.Peek();
+        if (_figures.Count <= 0) return;
+        var figure = _figures.Peek();
 
-            if (!figure.EndDraw())
-            {
-                figure = null;
-            }
-            currentFigure = null;
+        if (figure.EndDraw() == false)
+        {
+            _figures.Pop();
         }
+        _currentFigure = null;
     }
 
     public void Drag(Vector2 touchPosition)
     {
-        if (currentFigure != null)
-        {
-            Vector3 position = GetPositionPlace(touchPosition);
-            currentFigure.Draw(position);
-        }
+        if (_currentFigure == null) return;
+        var position = GetPositionPlace(touchPosition);
+        _currentFigure.Draw(position);
     }
 
     public void DeleteFigure()
     {
         Debug.Log("del");
-        if (figures.Count > 0)
-        {
-            Figure figure = figures.Pop();
-            figure.DestroyObject();
-            figure = null;
-        }
+        if (_figures.Count <= 0) return;
+        var figure = _figures.Pop();
+        figure.DestroyObject();
     }
 
     public Vector3 GetPositionPlace(Vector2 touchPosition)
     {
-        RaycastHit hit = RayFromCamera(touchPosition, 1000.0f);
-        return new Vector3(hit.point.x, hit.point.y, hit.point.z - _offSetZ);
+        var hit = RayFromCamera(touchPosition, 1000.0f);
+        return new Vector3(hit.point.x, hit.point.y, hit.point.z - offSetZ);
     }
 
     public RaycastHit RayFromCamera(Vector3 touchPosition, float rayLength)
     {
-        RaycastHit hit;
-        Ray ray = _cameraMain.ScreenPointToRay(touchPosition);
-        _isHitRayCast = Physics.Raycast(ray, out hit, rayLength);
+        var ray = _cameraMain.ScreenPointToRay(touchPosition);
+        _isHitRayCast = Physics.Raycast(ray, out var hit, rayLength);
         return hit;
     }
 

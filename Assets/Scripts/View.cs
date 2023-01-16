@@ -7,11 +7,11 @@ public class View : MonoBehaviour
 {
     private InputManager _inputManager;
 
-    [SerializeField] private Button _buttonDelete;
+    [SerializeField] private Button buttonDelete;
     public event Action ClickButtonDeleteEvent;
 
     public void Awake()
     {
-        if (_buttonDelete) _buttonDelete.onClick.AddListener(() => ClickButtonDeleteEvent?.Invoke());  
+        buttonDelete.onClick.AddListener(() => ClickButtonDeleteEvent?.Invoke());
     }
 }
