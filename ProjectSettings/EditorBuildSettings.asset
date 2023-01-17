@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TestVideoStreamInputScene.unity
-    guid: e09e0a74be86b334e84a6d72a3a1ee1f
+    path: Assets/Scenes/TestAudioStreamScene.unity
+    guid: a9b313512076dac4c845c59480c61fdf
   m_configObjects: {}
