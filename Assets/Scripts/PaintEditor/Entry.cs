@@ -14,16 +14,17 @@ public class Entry : MonoBehaviour
 
     private void Awake()
     {
+        view = Instantiate(viewPrefab);
+        
         _inputManager = new InputManager();
         _inputManager.Init();
         _inputManager.OnEnable();
-
-        view = Instantiate(viewPrefab);
-        uiController = new UiController(view);
-        drawerFigure = new DrawerFigure(Camera.main);
-
-        uiController.ClickButtonDeleteEvent += drawerFigure.DeleteFigure;
         
+        drawerFigure = new DrawerFigure();
+        drawerFigure.Init(Camera.main);
+
+        uiController = new UiController(view);
+        uiController.ClickButtonDeleteEvent += drawerFigure.DeleteFigure;
         _inputManager.StartTouchEvent += drawerFigure.StartTouch;
         _inputManager.CancelTouchEvent += drawerFigure.CancelTouch;
         _inputManager.DragTouchEvent += drawerFigure.Drag;

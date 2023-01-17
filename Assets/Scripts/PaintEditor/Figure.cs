@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public  class Figure 
 {
-    public virtual void CreateGameObject()
+    public virtual void CreateGameObject(Vector3 position)
     {
 
     }

@@ -8,18 +8,13 @@ public class Line : Figure
     [SerializeField] private float deltaPosition = 3.1f;
 
     private int _minCountPoint = 4;
-
     private LineRenderer _lineRenderer;
     private Vector2 _lastPosition;
     private float _currentDeltaPosition;
 
-    public Line(Vector3 position)
+    public override void CreateGameObject(Vector3 position)
     {
-        CreateGameObject(position);
-    }
-
-    public void CreateGameObject(Vector3 position)
-    {
+        //Debug.Log("Line");
         _lineRenderer = new GameObject("Line").AddComponent<LineRenderer>();
         _lineRenderer.material = materialLine;
         _lineRenderer.positionCount = 2;

@@ -13,7 +13,6 @@ public class InputManager
     public void Init()
     {
         control = new Control();
-
         control.Touch.TouchPress.started += ctx => StartTouch(control.Touch.Drag.ReadValue<Vector2>());
         control.Touch.TouchPress.canceled += ctx => CancelTouch();
         control.Touch.Drag.performed += Drag;

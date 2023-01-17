@@ -7,22 +7,24 @@ public class DrawerFigure
 {
     [SerializeField] private float offSetZ = 0.2f;
 
-    private Camera _cameraMain;
+    [SerializeField] private Camera _cameraMain;
     private bool _isHitRayCast;
     private Figure _currentFigure;
     private Stack<Figure> _figures = new Stack<Figure>();
 
-    public DrawerFigure(Camera cameraMain)
+    public void Init(Camera cameraMain)
     {
         Debug.Log("DrawerFigure");
-        this._cameraMain = cameraMain;
+        _cameraMain = cameraMain;
     }
 
     public void StartTouch(Vector2 touchPosition)
     {
-        Vector3 position = GetPositionPlace(touchPosition);
+        var position = GetPositionPlace(touchPosition);
         if (!_isHitRayCast) return;
-        _currentFigure = new Line(position);
+        _currentFigure = new Line();
+        _currentFigure.CreateGameObject(position);
+        
         _figures.Push(_currentFigure);
     }
 

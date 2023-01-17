@@ -11,6 +11,7 @@ public class UiController
 
     public UiController(View view)
     {
+        Debug.Log("UiController");
         view.ClickButtonDeleteEvent += ButtonClickDelete;
     }
 
