@@ -5,9 +5,9 @@ using UnityEngine;
 public class Line : Figure
 {
     [SerializeField] private Material materialLine;
-    [SerializeField] private float deltaPosition = 3.1f;
+    [SerializeField] private float deltaPosition = 0.1f;
 
-    private int _minCountPoint = 4;
+    private int _minCountPoint = 3;
     private LineRenderer _lineRenderer;
     private Vector2 _lastPosition;
     private float _currentDeltaPosition;
@@ -18,8 +18,8 @@ public class Line : Figure
         _lineRenderer = new GameObject("Line").AddComponent<LineRenderer>();
         _lineRenderer.material = materialLine;
         _lineRenderer.positionCount = 2;
-        _lineRenderer.startWidth = 0.5f;
-        _lineRenderer.endWidth = 0.5f;
+        _lineRenderer.startWidth = 0.05f;
+        _lineRenderer.endWidth = 0.05f;
         _lineRenderer.useWorldSpace = false;
         _lineRenderer.numCapVertices = 50;
         _lineRenderer.SetPosition(0, position);
