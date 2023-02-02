@@ -9,8 +9,8 @@ public class Entry : MonoBehaviour
 
     [SerializeField] private ARRaycastManager rayCastManager;
     [SerializeField] private RectTransform canvas;
-    [SerializeField] private View viewPrefab;
-    [SerializeField] private View view;
+    [SerializeField] private ViewBasic viewBasicPrefab;
+    [SerializeField] private ViewBasic viewBasic;
 
     [SerializeField] private UiController uiController;
     [SerializeField] private DrawerFigure drawerFigure;
@@ -20,7 +20,7 @@ public class Entry : MonoBehaviour
 
     private void Awake()
     {
-        view = Instantiate(viewPrefab,canvas);
+        viewBasic = Instantiate(viewBasicPrefab,canvas);
         
         
         _inputManager = new InputManager();
@@ -30,7 +30,7 @@ public class Entry : MonoBehaviour
         drawerFigure = new DrawerFigure();
         drawerFigure.Init(Camera.main, rayCastManager);
 
-        uiController = new UiController(view);
+        uiController = new UiController(viewBasic);
         uiController.ClickButtonDeleteEvent += drawerFigure.DeleteFigure;
         _inputManager.StartTouchEvent += drawerFigure.StartTouch;
         _inputManager.CancelTouchEvent += drawerFigure.CancelTouch;

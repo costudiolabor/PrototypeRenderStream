@@ -12,11 +12,10 @@ namespace PaintEditor
         private bool _isHitRayCast;
         private Figure _currentFigure;
         private Stack<Figure> _figures = new Stack<Figure>();
-        //[SerializeField] private Camera cameraMain;
         [SerializeField] private DetectorPlace detectorPlace;
+        
         public void Init(Camera cameraMain, ARRaycastManager rayCastManager)
         {
-            //Debug.Log("DrawerFigure");
             detectorPlace = new DetectorPlace();
             detectorPlace.Init(cameraMain, rayCastManager);
         }

@@ -52,6 +52,7 @@ namespace Unity.RenderStreaming.Samples
                 connectionIdInput.onValueChanged.AddListener(input => connectionId = input);
 
             receiveVideoViewer.OnUpdateReceiveTexture += OnUpdateReceiveTexture;
+            
             receiveAudioViewer.OnUpdateReceiveAudioSource += source =>
             {
                 source.loop = true;

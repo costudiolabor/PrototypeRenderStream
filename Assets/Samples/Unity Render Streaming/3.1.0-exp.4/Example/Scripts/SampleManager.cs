@@ -1,7 +1,7 @@
 namespace Unity.RenderStreaming.Samples
 {
 
-    internal class SampleManager
+    public class SampleManager
     {
         static SampleManager s_instance;
 

@@ -26,10 +26,10 @@ namespace PaintEditor
         
         public Vector3 GetPositionPlace(Vector2 touchPosition, out bool isHitRayCast)
         {
-            var pointPosition = RayFromCamera(touchPosition);
-            //var pointPosition = RayFromARCamera(touchPosition);
+            //var pointPosition = RayFromCamera(touchPosition);
+            var pointPosition = RayFromARCamera(touchPosition);
             isHitRayCast = _isHitRayCast;
-            Debug.Log("Pos = " + pointPosition);
+           // Debug.Log("Pos = " + pointPosition);
             return new Vector3(pointPosition.x, pointPosition.y, pointPosition.z - offSetZ);
         }
 
@@ -37,26 +37,13 @@ namespace PaintEditor
         {
             var ray = _cameraMain.ScreenPointToRay(touchPosition);
             _isHitRayCast = Physics.Raycast(ray, out var hit, rayLength);
-            Debug.Log("_isHit = " + _isHitRayCast);
+           // Debug.Log("_isHit = " + _isHitRayCast);
             return hit.point;
         }
         
         public Vector3 RayFromARCamera(Vector3 touchPosition)
         {
-            // if (!_raycastManager.Raycast(touchPosition, _raycastHits, TrackableType.PlaneWithinPolygon))
-            // {
-            //     return;
-            // }
-            // var hitPose = _raycastHits[0].pose;
-            // if (!_spawnedPlacedObject)
-            // {
-            //     _spawnedPlacedObject = Instantiate(placedObject, hitPose.position, hitPose.rotation);
-            // }
-            // _spawnedPlacedObject.transform.position = hitPose.position;
-            
             _isHitRayCast = _rayCastManager.Raycast(new Vector2(touchPosition.x, touchPosition.y), _raycastHits, TrackableType.PlaneWithinPolygon);
-            //Debug.Log("_isHit = " + _isHitRayCast);
-            
             return _isHitRayCast ?_raycastHits[0].pose.position : new Vector3(0,0,0);
         }
     }

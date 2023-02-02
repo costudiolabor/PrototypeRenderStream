@@ -16,14 +16,14 @@ using UnityEngine.XR.ARFoundation;
 
 namespace Unity.RenderStreaming.Samples
 {
-    internal enum SignalingType
+    public enum SignalingType
     {
         WebSocket,
         Http,
         Furioos
     }
 
-    internal class RenderStreamingSettings
+    public class RenderStreamingSettings
     {
         public const int DefaultStreamWidth = 1280;
         public const int DefaultStreamHeight = 720;

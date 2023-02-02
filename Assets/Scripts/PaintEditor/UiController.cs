@@ -4,14 +4,14 @@ using UnityEngine;
 [Serializable]
 public class UiController 
 {
-    [SerializeField] private View view;
+    [SerializeField] private ViewBasic viewBasic;
 
     public event Action ClickButtonDeleteEvent;
 
-    public UiController(View view)
+    public UiController(ViewBasic viewBasic)
     {
         //Debug.Log("UiController");
-        view.ClickButtonDeleteEvent += ButtonClickDelete;
+        viewBasic.ClickButtonDeleteEvent += ButtonClickDelete;
     }
 
     private void ButtonClickDelete()
