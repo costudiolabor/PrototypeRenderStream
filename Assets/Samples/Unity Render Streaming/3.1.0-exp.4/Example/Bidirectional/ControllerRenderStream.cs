@@ -19,7 +19,7 @@ namespace Unity.RenderStreaming.Samples
 #pragma warning restore 0649
         
         private string _connectionId;
-        private RenderStreamingSettings _settings;
+        private  RenderStreamingSettings _settings;
         
         public void Init(ViewRenderStream viewRenderStream)
         {
@@ -52,6 +52,11 @@ namespace Unity.RenderStreaming.Samples
             };
         }
 
+        public Vector2Int GetStreamSize()
+        {
+            return new Vector2Int((int)videoStreamSender.width, (int) videoStreamSender.height);
+        } 
+        
         void Start()
         {
             if (renderStreaming.runOnAwake)
@@ -68,6 +73,10 @@ namespace Unity.RenderStreaming.Samples
 
         private void OnStartedChannel(string connectionId)
         {
+            // int width = Screen.width;
+            // int height = Screen.height;
+            // Rect rect = new Rect(0, 0, width, height);
+            
             inputReceiver.SetInputRange(new Vector2Int((int)videoStreamSender.width, (int)videoStreamSender.height));
             inputReceiver.SetEnableInputPositionCorrection(true);
         }
@@ -76,6 +85,17 @@ namespace Unity.RenderStreaming.Samples
         {
             videoStreamSender.enabled = true;
             microphoneStreamer.enabled = true;
+        }
+
+
+        public void EnabledAudioStreamReceiver(bool isEnable)
+        {
+            receiveAudioViewer.enabled = isEnable;
+        }
+        
+        public void EnabledVideoStreamReceiver(bool isEnable)
+        {
+            receiveVideoViewer.enabled = isEnable;
         }
 
         private void SetUp()

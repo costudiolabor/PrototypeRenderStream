@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Unity.RenderStreaming;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,16 +10,20 @@ using UnityEngine.UI;
 public class ScreenShotView : ViewBase
 {
     [SerializeField] private RawImage paintImage;
+    [SerializeField] private ScreenShotAsync screenShotAsync;
 
     private Texture2D _renderResult;
     private Coroutine _coroutine;
+    private Vector2Int _streamSize;
 
     public event Action EndScreenShotEvent;
     public event Action EndSaveScreenShotEvent;
     
+    
 
-    public void Init()
+    public void Init(Vector2Int streamSize)
     {
+        _streamSize = streamSize;
         paintImage.gameObject.SetActive(false);
     }
 
@@ -26,29 +31,18 @@ public class ScreenShotView : ViewBase
     {
         if (paintImage.texture == null)
         {
-            Texture texture = await AsyncTake();
+            Texture texture = await screenShotAsync.Take(_streamSize); 
             SetPaintImage(texture);
         }
 
         EndScreenShotEvent?.Invoke();
     }
 
-    public async Task<Texture2D> SaveScreenShot()
+    public async Task<Texture> SaveScreenShot()
     {
-         Texture2D texture = await AsyncTake();
-         EndSaveScreenShotEvent?.Invoke();
-         return texture;
-    }
-
-    private async Task<Texture2D> AsyncTake()
-    {
-        _coroutine = StartCoroutine(GetScreenShot());
-        while (_coroutine != null)
-        {
-            await Task.Yield();
-        }
-
-        return _renderResult;
+        Texture texture = await screenShotAsync.Take(_streamSize); 
+        EndSaveScreenShotEvent?.Invoke();
+        return texture;
     }
 
     public void DisableScreenShot()
@@ -61,17 +55,5 @@ public class ScreenShotView : ViewBase
     {
         paintImage.gameObject.SetActive(true);
         paintImage.texture = renderResult;
-    }
-
-    private IEnumerator GetScreenShot()
-    {
-        int width = Screen.width;
-        int height = Screen.height;
-        yield return new WaitForEndOfFrame();
-        _renderResult = new Texture2D(width, height, TextureFormat.RGB24, false);
-        Rect rect = new Rect(0, 0, width, height);
-        _renderResult.ReadPixels(rect, 0, 0);
-        _renderResult.Apply();
-        _coroutine = null;
     }
 }

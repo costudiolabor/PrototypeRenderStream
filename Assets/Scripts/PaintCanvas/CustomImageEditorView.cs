@@ -7,13 +7,6 @@ public class CustomImageEditorView : ViewBase, IDragHandler, IDropHandler, IPoin
 {
     [SerializeField] private RawImage drawingImage;
     [SerializeField] private GameObject panelButtons;
-    //[SerializeField] private Button cancelButton;
-   // [SerializeField] private Button saveButton;
-   // [SerializeField] private Button undoButton;
-
-    //public event Action CancelButtonEvent;
-   // public event Action SaveButtonEvent;
-  //  public event Action UndoButtonEvent;
 
     public event Action PointerDownEvent;
     public event Action DropEvent;

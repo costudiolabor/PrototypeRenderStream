@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GallaryView : ViewBase
 {
@@ -12,7 +8,7 @@ public class GallaryView : ViewBase
     [SerializeField] private ScreenShotImage prefabScreenShotImage;
     [SerializeField] private Preview preview;
 
-    public void AddScreenShotImage(Texture2D texture2D)
+    public void AddScreenShotImage(Texture texture2D)
     {
         ScreenShotImage screenShotImage = Instantiate(prefabScreenShotImage, parentScreenShot);
         screenShotImage.SetTexture(texture2D);
@@ -20,7 +16,7 @@ public class GallaryView : ViewBase
         screenShotImages.Add(screenShotImage);
     }
 
-    private void ClosePreview(Texture2D texture)
+    private void ClosePreview(Texture texture)
     {
         preview.Open();
         preview.SetRawImage(texture);

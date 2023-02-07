@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 476160031277330748}
   - component: {fileID: 3872785916960090207}
+  - component: {fileID: 89021577502761031}
   m_Layer: 0
   m_Name: ScreenShot
   m_TagString: Untagged
@@ -51,7 +52,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   paintImage: {fileID: 1660548995892361037}
-  gallaryView: {fileID: 0}
+  screenShotAsync: {fileID: 89021577502761031}
+--- !u!114 &89021577502761031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3872785916960090204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b1702af7d335d4459c09c59f85de928, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8459172375925395320
 GameObject:
   m_ObjectHideFlags: 0

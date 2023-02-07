@@ -5,34 +5,31 @@ public class ControllerMenu : MonoBehaviour
 {
     [SerializeField] private ViewMenu _viewMenu;
 
-    private Camera _mainCamera;
-
     public event Action<Color> ChangeColorEvent;
+    public event Action
+        MicOnEvent,
+        MicOffEvent,
+        CameraOnEvent,
+        CameraOffEvent;
 
-    public void Init(Camera mainCamera)
+    public void Init()
     {
-        _mainCamera = mainCamera;
-
-        _viewMenu.MicOnEvent += MicOn;
-        _viewMenu.MicOffEvent += MicOff;
-        _viewMenu.CameraOnEvent += CameraOn;
-        _viewMenu.CameraOffEvent += CameraOff;
+        _viewMenu.MicOnEvent += () => MicOnEvent?.Invoke(); 
+        _viewMenu.MicOffEvent += () => MicOffEvent?.Invoke();  
+        _viewMenu.CameraOnEvent += () => CameraOnEvent?.Invoke();
+        _viewMenu.CameraOffEvent += () =>  CameraOffEvent?.Invoke(); 
         _viewMenu.ChangeColorEvent += color => ChangeColorEvent?.Invoke(color);
     }
-
-    private void MicOn()
+    
+    private void OnDestroy()
     {
+        MicOnEvent = null;
+        MicOffEvent = null;
+        CameraOnEvent = null;
+        CameraOffEvent = null;
+        ChangeColorEvent = null;
+       
     }
 
-    private void MicOff()
-    {
-    }
-
-    private void CameraOn()
-    {
-    }
-
-    private void CameraOff()
-    {
-    }
+   
 }

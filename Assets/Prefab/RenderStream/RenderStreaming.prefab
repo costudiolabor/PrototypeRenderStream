@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 245521928518153186}
   - component: {fileID: 245521928518153185}
   - component: {fileID: 245521928518153196}
-  - component: {fileID: 245521928518153184}
   - component: {fileID: 245521928518153197}
   - component: {fileID: 959850333126299626}
   - component: {fileID: 170446996554248986}
+  - component: {fileID: 6108039608991854138}
   - component: {fileID: 5179847436737964121}
   m_Layer: 0
   m_Name: RenderStreaming
@@ -57,8 +57,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 045786cf504bd7347842d6948241cbd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  urlSignaling: ws://10.240.38.24
-  signalingType: Unity.RenderStreaming.Signaling.WebSocketSignaling
+  urlSignaling: http://10.240.38.24
+  signalingType: Unity.RenderStreaming.Signaling.HttpSignaling
   iceServers:
   - credential: 
     credentialType: 0
@@ -83,7 +83,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   streams:
   - {fileID: 245521928518153185}
-  - {fileID: 245521928518153184}
+  - {fileID: 6108039608991854138}
   - {fileID: 245521928518153196}
   - {fileID: 959850333126299626}
   - {fileID: 245521928518153197}
@@ -122,34 +122,6 @@ MonoBehaviour:
     m_SdpFmtpLine: 
     m_ChannelCount: 0
     m_SampleRate: 0
---- !u!114 &245521928518153184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 245521928518153188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bcc82901c3f48a88d3408251afa3365, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TextureSize: {x: 1080, y: 1920}
-  m_Source: 1
-  m_Camera: {fileID: 0}
-  m_Texture: {fileID: 0}
-  m_WebCamDeviceIndex: 0
-  m_Depth: 16
-  m_AntiAliasing: 1
-  m_Codec:
-    m_MimeType: 
-    m_SdpFmtpLine: 
-  m_FrameRate: 30
-  m_Bitrate:
-    min: 10
-    max: 1000
-  m_ScaleFactor: 1
-  m_AutoRequestUserAuthorization: 1
 --- !u!114 &245521928518153197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,6 +304,34 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6108039608991854138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245521928518153188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bcc82901c3f48a88d3408251afa3365, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TextureSize: {x: 1080, y: 1920}
+  m_Source: 1
+  m_Camera: {fileID: 0}
+  m_Texture: {fileID: 0}
+  m_WebCamDeviceIndex: 0
+  m_Depth: 16
+  m_AntiAliasing: 1
+  m_Codec:
+    m_MimeType: 
+    m_SdpFmtpLine: 
+  m_FrameRate: 60
+  m_Bitrate:
+    min: 500
+    max: 1000
+  m_ScaleFactor: 1
+  m_AutoRequestUserAuthorization: 1
 --- !u!114 &5179847436737964121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,7 +346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   renderStreaming: {fileID: 245521928518153190}
   receiveAudioSource: {fileID: 170446996554248986}
-  videoStreamSender: {fileID: 245521928518153184}
+  videoStreamSender: {fileID: 6108039608991854138}
   receiveVideoViewer: {fileID: 245521928518153185}
   microphoneStreamer: {fileID: 959850333126299626}
   receiveAudioViewer: {fileID: 245521928518153196}

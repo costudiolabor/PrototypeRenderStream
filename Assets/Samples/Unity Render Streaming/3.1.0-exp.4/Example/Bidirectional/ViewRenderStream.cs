@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,8 @@ using UnityEngine.UI;
         [SerializeField] private Button hangUpButton;
         [SerializeField] private RawImage localVideoImage;
         [SerializeField] private RawImage remoteVideoImage;
+        [SerializeField] private GameObject panelMenu;
+        
 
         public event Action
             StartButtonEvent,
@@ -31,6 +34,12 @@ using UnityEngine.UI;
             hangUpButton.interactable = false;
         }
 
+
+        public void ActiveRemoteVideo(bool isActive)
+        {
+            remoteVideoImage.gameObject.SetActive(isActive);
+        }
+        
         public void SetRemoteVideoImage(Texture texture)
         {
             remoteVideoImage.texture = texture;
@@ -51,6 +60,7 @@ using UnityEngine.UI;
         {
             setUpButton.interactable = false;
             hangUpButton.interactable = true;
+            panelMenu.SetActive(false);
         }
 
         private void ClickHangUpButton()

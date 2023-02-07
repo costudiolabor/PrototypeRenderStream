@@ -1,3 +1,4 @@
+using System;
 using Unity.RenderStreaming.Samples;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -40,41 +41,68 @@ public class MainEntry : MonoBehaviour
         _customImageEditor.PointerDownEvent += StartScreenShot;
         
         _mainMenu.ChangeColorEvent += ChangeColor;
-
+        _mainMenu.MicOnEvent += MicOn; 
+        _mainMenu.MicOffEvent += MicOff;  
+        _mainMenu.CameraOnEvent += CameraOn;
+        _mainMenu.CameraOffEvent += CameraOff; 
         
         _savePanel.UndoButtonEvent += _customImageEditor.Undo;
-        
         _savePanel.CancelButtonEvent += _screenShotView.DisableScreenShot;
         _savePanel.CancelButtonEvent += _customImageEditor.Clear;
-
         _savePanel.SaveButtonEvent += SaveScreenShot;
 
-        _screenShotView.Init();
+        ActiveRemoteVideoEvent += _viewRenderStream.ActiveRemoteVideo;
+
+        _screenShotView.Init(_controllerRenderStream.GetStreamSize());
+        _controllerRenderStream.Init(_viewRenderStream);
         _mainMenu.Init(mainCamera);
         _customImageEditor.Init(screenShotParent);
         _viewRenderStream.Init();
-        _controllerRenderStream.Init(_viewRenderStream);
     }
 
+    public event Action<bool> ActiveRemoteVideoEvent;
+    
+    private void MicOn()
+    {
+        _controllerRenderStream.EnabledAudioStreamReceiver(true);
+    }
+
+    private void MicOff()
+    {
+        _controllerRenderStream.EnabledAudioStreamReceiver(false);
+        Debug.Log("OffMIc");
+    }
+
+    private void CameraOn()
+    {
+        _controllerRenderStream.EnabledVideoStreamReceiver(true);
+        ActiveRemoteVideoEvent?.Invoke(true);
+    }
+
+    private void CameraOff()
+    {
+        _controllerRenderStream.EnabledVideoStreamReceiver(false);
+        ActiveRemoteVideoEvent?.Invoke(false);
+    }
+    
     private void ChangeColor(Color color)
     {
         _customImageEditor.SetColor(color);
     }
 
-    private async void  SaveScreenShot()
+    private async void SaveScreenShot()
     {
-       // Debug.Log("Save ScreenShot");
         contentParent.gameObject.SetActive(false);
-        Texture2D texture = await _screenShotView.SaveScreenShot();
+
+        Texture texture = await _screenShotView.SaveScreenShot();
         _gallaryView.AddScreenShotImage(texture);
         _screenShotView.DisableScreenShot();
         _customImageEditor.Clear();
     }
-    
-    
+
+
     private void StartScreenShot()
     {
-        //Debug.Log("OnScreenShot");
         _gallaryView.Close();
         contentParent.gameObject.SetActive(false);
         _screenShotView.Take();
@@ -85,16 +113,31 @@ public class MainEntry : MonoBehaviour
         contentParent.gameObject.SetActive(true);
         _gallaryView.Open();
     }
-    
+
     private void EndScreenShot()
     {
         contentParent.gameObject.SetActive(true);
         _savePanel.Open();
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         _customImageEditor.PointerDownEvent -= StartScreenShot;
+        _screenShotView.EndScreenShotEvent -= EndScreenShot;
+        _screenShotView.EndSaveScreenShotEvent -= EndSaveScreenShot;
+        
+        _mainMenu.MicOnEvent -= MicOn; 
+        _mainMenu.MicOffEvent -= MicOff;  
+        _mainMenu.CameraOnEvent -= CameraOn;
+        _mainMenu.CameraOffEvent -= CameraOff; 
         _mainMenu.ChangeColorEvent -= ChangeColor;
+        
+        _savePanel.UndoButtonEvent -= _customImageEditor.Undo;
+        _savePanel.CancelButtonEvent -= _screenShotView.DisableScreenShot;
+        _savePanel.CancelButtonEvent -= _customImageEditor.Clear;
+        _savePanel.SaveButtonEvent -= SaveScreenShot;
+
+        ActiveRemoteVideoEvent -= _viewRenderStream.ActiveRemoteVideo;
+        
     }
 }

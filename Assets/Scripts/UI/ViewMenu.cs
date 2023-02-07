@@ -32,6 +32,14 @@ public class ViewMenu : ViewBase
         CameraOffEvent += CameraOff;
         ColorMenuEvent += ColorMenu;
         colorMenu.ChangeColorEvent += ChangeColorButton;
+        
+        
+        buttonMicOn.onClick.AddListener(delegate { MicOnEvent?.Invoke(); });
+        buttonMicOff.onClick.AddListener(delegate { MicOffEvent?.Invoke(); });
+        buttonCameraOn.onClick.AddListener(delegate { CameraOnEvent?.Invoke(); });
+        buttonCameraOff.onClick.AddListener(delegate { CameraOffEvent?.Invoke(); });
+        buttonColorMenu.onClick.AddListener(delegate { ColorMenuEvent?.Invoke(); });
+        
     }
 
 
@@ -43,20 +51,23 @@ public class ViewMenu : ViewBase
 
     private void OnEnable()
     {
-        buttonMicOn.onClick.AddListener(delegate { MicOnEvent?.Invoke(); });
-        buttonMicOff.onClick.AddListener(delegate { MicOffEvent?.Invoke(); });
-        buttonCameraOn.onClick.AddListener(delegate { CameraOnEvent?.Invoke(); });
-        buttonCameraOff.onClick.AddListener(delegate { CameraOffEvent?.Invoke(); });
-        buttonColorMenu.onClick.AddListener(delegate { ColorMenuEvent?.Invoke(); });
+       
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
+        MicOnEvent = null;
+        MicOffEvent = null;
+        CameraOnEvent = null;
+        CameraOffEvent = null;
+        ChangeColorEvent = null;
+        
         buttonMicOn.onClick.RemoveAllListeners();
         buttonMicOff.onClick.RemoveAllListeners();
         buttonCameraOn.onClick.RemoveAllListeners();
         buttonCameraOff.onClick.RemoveAllListeners();
         buttonColorMenu.onClick.RemoveAllListeners();
+        
     }
 
     private void MicOn()
@@ -85,6 +96,7 @@ public class ViewMenu : ViewBase
 
     private void ColorMenu()
     {
+        Debug.Log("openColorMenu");
         if (!colorMenu.gameObject.activeInHierarchy)
             colorMenu.Open();
         else
