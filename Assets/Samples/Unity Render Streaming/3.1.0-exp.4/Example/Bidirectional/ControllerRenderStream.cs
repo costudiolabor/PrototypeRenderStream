@@ -2,6 +2,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+using Unity.RenderStreaming;
+
 namespace Unity.RenderStreaming.Samples
 {
     public class ControllerRenderStream : MonoBehaviour

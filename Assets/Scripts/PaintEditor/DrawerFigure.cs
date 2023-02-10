@@ -24,7 +24,7 @@ namespace PaintEditor
         {
             var position = detectorPlace.GetPositionPlace(touchPosition,out _isHitRayCast);
             if (!_isHitRayCast) return;
-            _currentFigure = new Line();
+            _currentFigure = new LineCustom();
             _currentFigure.CreateGameObject(position);
         
             _figures.Push(_currentFigure);

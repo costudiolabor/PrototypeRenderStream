@@ -6,8 +6,7 @@ using UnityEngine.EventSystems;
 public class CustomImageEditorView : ViewBase, IDragHandler, IDropHandler, IPointerDownHandler
 {
     [SerializeField] private RawImage drawingImage;
-    [SerializeField] private GameObject panelButtons;
-
+ 
     public event Action PointerDownEvent;
     public event Action DropEvent;
     public event Action<Vector2> DragEvent;

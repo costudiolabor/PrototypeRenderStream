@@ -6,7 +6,7 @@ namespace UnityEngine.UI
 {
     // based off of code from https://forum.unity.com/threads/new-ui-and-line-drawing.253772/page-2
     // and the Unity UI Extensions project https://bitbucket.org/UnityUIExtensions/unity-ui-extensions/wiki/About
-    [AddComponentMenu("UI/Line Renderer (UI)")]
+    [AddComponentMenu("UI/LineCustom Renderer (UI)")]
     [RequireComponent(typeof(RectTransform), typeof(CanvasRenderer))]
     public class UILineRenderer : MaskableGraphic
     {
@@ -121,7 +121,7 @@ namespace UnityEngine.UI
 
         [SerializeField, Tooltip("Do the points identify a single long continuous line, or split pairs of lines?")]
         internal bool drawPointsAsPairs;
-        [SerializeField, Tooltip("Add end caps to each line\nMultiple caps when used with Line List")]
+        [SerializeField, Tooltip("Add end caps to each line\nMultiple caps when used with LineCustom List")]
         internal bool lineCaps;
 
         public float LineThickness {

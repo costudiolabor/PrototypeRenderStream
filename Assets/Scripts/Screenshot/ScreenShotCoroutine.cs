@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class ScreenShot : MonoBehaviour
+public class ScreenShotCoroutine : MonoBehaviour
 {
     private Texture2D _renderResult;
 

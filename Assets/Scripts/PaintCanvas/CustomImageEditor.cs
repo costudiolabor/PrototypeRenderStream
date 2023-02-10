@@ -11,7 +11,7 @@ public class CustomImageEditor : MonoBehaviour
     [SerializeField] private float brushSize = 25f;
     [SerializeField] private CustomImageEditorView customImageEditorView;
     
-    private readonly Stack<LineCanvas> _undoStack = new();
+    private readonly Stack<Line> _undoStack = new();
     private readonly Drawer _drawer = new();
     
     private RectTransform _linesParent;
@@ -26,7 +26,7 @@ public class CustomImageEditor : MonoBehaviour
         customImageEditorView.DragEvent += Draw;
         customImageEditorView.DropEvent += StopDraw;
         customImageEditorView.PointerDownEvent += delegate { PointerDownEvent?.Invoke(); }; ;
-        lineFactory.Initialize(linesParent);
+        lineFactory.SetParent(linesParent);
     }
     
    private void Draw(Vector2 rectPoint){

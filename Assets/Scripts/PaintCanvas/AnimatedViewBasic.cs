@@ -2,7 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(CanvasGroup))]
 [RequireComponent(typeof(Animator))]
-public class AnimatedView : View {
+public class AnimatedViewBasic : View {
     [SerializeField] private Animator animator;
     [SerializeField] private string closeTrigger = "disappear";
 

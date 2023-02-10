@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.RenderStreaming;
 
 namespace Unity.RenderStreaming.Samples
 {

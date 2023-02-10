@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class Line : Figure
+public class LineCustom : Figure
 {
     [SerializeField] private Material materialLine;
     [SerializeField] private float deltaPosition = 0.1f;
@@ -14,8 +14,8 @@ public class Line : Figure
 
     public override void CreateGameObject(Vector3 position)
     {
-        //Debug.Log("Line");
-        _lineRenderer = new GameObject("Line").AddComponent<LineRenderer>();
+        //Debug.Log("LineCustom");
+        _lineRenderer = new GameObject("LineCustom").AddComponent<LineRenderer>();
         _lineRenderer.material = materialLine;
         _lineRenderer.positionCount = 2;
         _lineRenderer.startWidth = 0.05f;

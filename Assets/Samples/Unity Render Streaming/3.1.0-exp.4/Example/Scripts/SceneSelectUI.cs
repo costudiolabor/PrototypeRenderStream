@@ -9,6 +9,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Gyroscope = UnityEngine.InputSystem.Gyroscope;
+using Unity.RenderStreaming;
+
 
 #if URS_USE_AR_FOUNDATION
 using UnityEngine.XR.ARFoundation;

@@ -1,6 +1,6 @@
 using UnityEngine;
 public class Drawer {
-    public LineCanvas line{ get; set; }
+    public Line line{ get; set; }
     public void Draw(Vector2 point){
         if(line ==null) return;
        

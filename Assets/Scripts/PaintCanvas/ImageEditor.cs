@@ -1,129 +1,69 @@
-using System.Collections.Generic;
-using Enums;
-//using Cysharp.Threading.Tasks;
-using Enums;
+using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 [System.Serializable]
-public class ImageEditor : ViewOperator<ImageEditorView> 
+public class ImageEditor : ViewOperator<ImageEditorView>, IDisposable
 {
-    [SerializeField] private float brushSize = 25f;
-    [SerializeField] private LineFactory lineFactory;
-    [SerializeField] private ScreenShotView screenshotPrefab;
-    
-    private readonly Stack<LineCanvas> _undoStack = new();
-    private readonly Drawer _drawer = new();
+    [SerializeField] protected ImageEditorModel imageEditorModel; 
+    protected float width;
+    protected UniTaskCompletionSource<Texture2D> taskCompletionSource;
 
-    private  ScreenShotView _screenshot;
-    private Color _color = Color.red;
-    private BrushType _brushType;
-    private float _width;
-    //private UniTaskCompletionSource<Texture2D> _taskCompletionSource;
-
-   
-        
-    public override void InitializeView(){
+    public  void InitializeView() {
         base.InitializeView();
         view.tools.AcceptClickedEvent += OnAccept;
         view.tools.RejectClickedEvent += OnReject;
-        view.DragEvent += Draw;
-        view.DropEvent += StopDraw;
-        view.tools.UndoEvent += Undo;
-        view.tools.ArrowSelectedEvent += OnArrowSelect;
-        view.tools.LineSelectedEvent += OnLineSelect;
-        view.tools.colorMenu.ColorChangedEvent += SetColor;
-
-        view.tools.ScreenShotEvent += EditProcess;
-        
-        //_screenshot = Object.Instantiate(screenshotPrefab);
+        view.DragEvent += imageEditorModel.Draw;
+        view.DropEvent += imageEditorModel.StopDraw;
+        view.tools.UndoEvent += imageEditorModel.Undo;
+        view.tools.ArrowSelectedEvent += imageEditorModel.OnArrowSelect;
+        view.tools.LineSelectedEvent += imageEditorModel.OnLineSelect;
+     
+        view.tools.colorMenu.ColorChangedEvent += imageEditorModel.SetColor;
+        imageEditorModel.Initialize(view.linesParent);
     }
 
-    public void EditProcess()
+    public async void OnStart()
     {
-        Debug.Log("Screen");
-        Texture2D textureForEdit = new Texture2D(100,100);
-        Clear();
-        view.Open();
-        view.SetTexture(textureForEdit);
-        lineFactory.Initialize(view.linesParent);
+        view.tools.Close();
+        var texture = await imageEditorModel.ScreenShotTake();
+        view.tools.Open();
     
-        var resultTexture = new Texture2D(100,100);
-        view.Close();
-    
-        //return resultTexture;
+        await EditProcess(texture);
+        taskCompletionSource.TrySetResult(texture);
     }
     
-    // public async UniTask<Texture2D> EditProcess(Texture2D textureForEdit){
-    //     Clear();
-    //     view.Open();
-    //     view.SetTexture(textureForEdit);
-    //     lineFactory.Initialize(view.linesParent);
-    //
-    //     _taskCompletionSource = new UniTaskCompletionSource<Texture2D>();
-    //      var resultTexture = await _taskCompletionSource.Task;
-    //     view.Close();
-    //
-    //     return resultTexture;
-    // }
-    
+    public async UniTask<Texture2D> EditProcess(Texture2D textureForEdit) {
+        imageEditorModel.Clear();
+        view.Open();
+        view.SetBackground(textureForEdit);
+        taskCompletionSource = new UniTaskCompletionSource<Texture2D>();
+        var resultTexture = await taskCompletionSource.Task;
+        view.Close();
+        return resultTexture;
+    }
+
     private async void OnAccept(){
         view.tools.Close();
-        //var texture = await _screenshot.Take();
+        var texture = await imageEditorModel.ScreenShotTake();
         view.tools.Open();
-        //_taskCompletionSource.TrySetResult(texture);
+        taskCompletionSource.TrySetResult(texture);
     }
-
-    private void Draw(Vector2 rectPoint){
-        if (_drawer.line == null){
-            _drawer.line = lineFactory.GetBrush(_brushType);
-            _drawer.line.Initialize(_color, brushSize);
-        }
-
-        _drawer.Draw(rectPoint);
-    }
-
-    private void StopDraw(){
-        if (_drawer.line.PositionsCount > 1)
-            _undoStack.Push(_drawer.line);
-
-        _drawer.StopDraw();
-    }
-
-    private void Undo(){
-        if (_undoStack.Count == 0) return;
-
-        var line = _undoStack.Pop();
-        Object.Destroy(line.gameObject);
-    }
-
-    private void OnReject(){
-       // _taskCompletionSource.TrySetCanceled();
+    
+    private void OnReject() {
+        taskCompletionSource.TrySetCanceled();
         view.Close();
     }
 
-    private void Clear(){
-        foreach (var line in _undoStack)
-            Object.Destroy(line.gameObject);
-
-        _undoStack.Clear();
-    }
-
-    private void SetColor(Color color) =>
-        _color = color;
-
-    private void OnArrowSelect()
+    public void Dispose()
     {
-        
-        Debug.Log("Arrow");
-        _brushType = BrushType.Arrow;
+        view.tools.AcceptClickedEvent -= OnAccept;
+        view.tools.RejectClickedEvent -= OnReject;
+        view.DragEvent -= imageEditorModel.Draw;
+        view.DropEvent -= imageEditorModel.StopDraw;
+        view.tools.UndoEvent -= imageEditorModel.Undo;
+        view.tools.ArrowSelectedEvent -= imageEditorModel.OnArrowSelect;
+        view.tools.LineSelectedEvent -= imageEditorModel.OnLineSelect;
+        view.tools.colorMenu.ColorChangedEvent -= imageEditorModel.SetColor;
     }
-    
-    private void OnLineSelect() =>
-        _brushType = BrushType.Line;
-
-    private void OnEnable(){
-
-    }
-
-
 }
