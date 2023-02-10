@@ -1,31 +1,58 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
-
+using UnityEngine.Events;
 using  UnityEngine.UI;
 
+public class ImageEditorView : AnimatedView {
+    [SerializeField] private RectTransform toolsParent;
+    [SerializeField] private Toggle lineToggle, arrowToggle, stickerToggle;
+    [SerializeField] private Button acceptButton, cancelButton, undoButton; 
 
-public class ImageEditorView : AnimatedView, IDragHandler, IDropHandler {
-    [SerializeField] protected RawImage drawingImage;
-    [SerializeField] private Tools drawTools;
-    public RectTransform linesParent;
-   
-    public event Action DropEvent;
-    public event Action<Vector2> DragEvent;
+    public ColorMenu colorMenu;
+    public DrawingCanvas drawingCanvas;
+
+    public event Action AcceptClickedEvent, RejectClickedEvent, UndoEvent, LineSelectedEvent, ArrowSelectedEvent, StickerSelectedEvent;
     
-    public Tools tools => drawTools;
-
-    public void OnDrag(PointerEventData eventData){
-        if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(drawingImage.rectTransform, eventData.position, null, out var rectPoint)) return;
-        DragEvent?.Invoke(rectPoint);
+    private void OnLineSelect(bool isOn){
+        if (!isOn) return;
+        LineSelectedEvent?.Invoke();
     }
 
-    public void OnDrop(PointerEventData eventData){
-        DropEvent?.Invoke();
+    private void OnArrowSelect(bool isOn){
+         if (!isOn) return;
+        ArrowSelectedEvent?.Invoke();
     }
 
-    public void SetBackground(Texture2D texture){
-        drawingImage.texture = texture;
+    private void OnStickerSelect(bool isOn){
+        if (!isOn) return;
+        StickerSelectedEvent?.Invoke();
+    }
+    
+    
+    public void NotifySelectedTool(){
+        if (lineToggle.isOn) LineSelectedEvent?.Invoke();
+        if (arrowToggle.isOn) ArrowSelectedEvent?.Invoke();
+        if (stickerToggle.isOn) StickerSelectedEvent?.Invoke();
+    }
+
+    private void Awake(){
+        acceptButton.onClick.AddListener(delegate { AcceptClickedEvent?.Invoke(); });
+        cancelButton.onClick.AddListener(delegate { RejectClickedEvent?.Invoke(); });
+        undoButton.onClick.AddListener(delegate { UndoEvent?.Invoke(); });
+        
+        lineToggle.onValueChanged.AddListener(OnLineSelect);
+        arrowToggle.onValueChanged.AddListener(OnArrowSelect);
+        stickerToggle.onValueChanged.AddListener(OnStickerSelect);
+        
+        NotifySelectedTool();
+    }
+
+    private void OnDestroy(){
+        acceptButton.onClick.RemoveAllListeners();
+        cancelButton.onClick.RemoveAllListeners();
+        undoButton.onClick.RemoveAllListeners();
+        lineToggle.onValueChanged.RemoveAllListeners();
+        arrowToggle.onValueChanged.RemoveAllListeners();
+        stickerToggle.onValueChanged.RemoveAllListeners();
     }
 }

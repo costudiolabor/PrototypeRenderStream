@@ -347,7 +347,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 444037995}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -392,6 +392,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1190496904772950514, guid: f9b8f58dabb524042a60fe7fb1447046, type: 3}
+      propertyPath: graphicEditor.prefab
+      value: 
+      objectReference: {fileID: 9043596416726735273, guid: 9e33c9a3e4124ef4681bb725211bea8e, type: 3}
+    - target: {fileID: 1190496904772950514, guid: f9b8f58dabb524042a60fe7fb1447046, type: 3}
+      propertyPath: graphicEditor.viewParent
+      value: 
+      objectReference: {fileID: 5146193}
+    - target: {fileID: 1190496904772950514, guid: f9b8f58dabb524042a60fe7fb1447046, type: 3}
+      propertyPath: graphicEditor.editors.lineEditor.screenshotPrefab
+      value: 
+      objectReference: {fileID: 1608640987172346434, guid: 26d9fcd74cca1134194fc903c354eca0, type: 3}
+    - target: {fileID: 1190496904772950514, guid: f9b8f58dabb524042a60fe7fb1447046, type: 3}
+      propertyPath: graphicEditor.editors.stickerEditor.prefabSticker
+      value: 
+      objectReference: {fileID: 5746579363794787963, guid: 0e38d3881bf58cb4b84a0a95a6d9cfbd, type: 3}
+    - target: {fileID: 1190496904772950514, guid: f9b8f58dabb524042a60fe7fb1447046, type: 3}
+      propertyPath: graphicEditor.editors.lineEditor.lineFactory.linePrefab
+      value: 
+      objectReference: {fileID: 56282802960156226, guid: bab61ff5661a84c4fb4e82b88051cafc, type: 3}
+    - target: {fileID: 1190496904772950514, guid: f9b8f58dabb524042a60fe7fb1447046, type: 3}
+      propertyPath: graphicEditor.editors.lineEditor.lineFactory.arrowPrefab
+      value: 
+      objectReference: {fileID: 6204102368723038970, guid: e29d42d39528008458f41a9f6f0bb8d7, type: 3}
     - target: {fileID: 2450311495752182388, guid: f9b8f58dabb524042a60fe7fb1447046, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -440,10 +464,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Entrance
       objectReference: {fileID: 0}
-    - target: {fileID: 2450311495752182391, guid: f9b8f58dabb524042a60fe7fb1447046, type: 3}
-      propertyPath: graphicEditor.viewParent
-      value: 
-      objectReference: {fileID: 5146193}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9b8f58dabb524042a60fe7fb1447046, type: 3}
 --- !u!1 &1909509631

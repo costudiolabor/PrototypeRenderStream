@@ -8,9 +8,9 @@ public class Entrance : MonoBehaviour
     //[SerializeField] private Streamer streamer = new Streamer();
     [SerializeField] private GraphicEditor graphicEditor;
 
-    private void Awake() {
+    private async void Awake() {
         //streamer.Initialize();
-        graphicEditor.InitializeView();
-        graphicEditor.OnStart();
+        graphicEditor.Initialize();
+        await graphicEditor.EditProcess(new Texture2D(1,1));
     }
 }

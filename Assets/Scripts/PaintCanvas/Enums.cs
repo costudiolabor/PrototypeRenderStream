@@ -4,6 +4,13 @@ namespace Enums {
         Arrow = 1,
     }
 
+    public enum ToolType {
+        Draw =0,
+        Stickers =1
+    }
+    
+    
+
     public enum HighlightState {
         NotSet = -1,
         InverterQ1Q2Q4 = 0,

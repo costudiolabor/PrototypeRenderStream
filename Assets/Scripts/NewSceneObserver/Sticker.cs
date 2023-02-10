@@ -10,12 +10,16 @@ public class Sticker : MonoBehaviour
    [SerializeField] private RectTransform _rectTransform;
    [SerializeField] private Image _sampleImage;
    [SerializeField] private Text sampleText;
+   [SerializeField] private Button buttonSticker;
    [SerializeField] private Button buttonDeleteSticker;
+   
 
+   public event Action OpenStickerEvent;
    public event Action<Sticker> DeleteStickerEvent;
 
    public void Initialize()
    {
+      buttonSticker.onClick.AddListener(delegate { OpenStickerEvent?.Invoke(); });
       buttonDeleteSticker.onClick.AddListener(DeleteSticker);
    }
    

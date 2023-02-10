@@ -2,28 +2,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class UIDrag : ViewBase, IDragHandler //, IBeginDragHandler, IEndDragHandler
+public class UIDrag : ViewBase, IDragHandler, IBeginDragHandler//, IEndDragHandler
 {
-    private Transform _transform;
+    [SerializeField] private RectTransform rectTransform;
+    private Vector2 offSet;
 
-    private void Awake()
+    public void OnBeginDrag(PointerEventData eventData)
     {
-        _transform = transform;
+        var position = rectTransform.position;
+        offSet = eventData.pointerCurrentRaycast.screenPosition - new Vector2(position.x, position.y);
     }
 
-    public void OnDrag(PointerEventData eventData)
-    {
-        _transform.position = eventData.pointerCurrentRaycast.screenPosition;
-        //Debug.Log("On Drag!");
+    public void OnDrag(PointerEventData eventData) {
+        
+        rectTransform.position = eventData.pointerCurrentRaycast.screenPosition - offSet;
     }
 
-    // public void OnBeginDrag(PointerEventData eventData)
-    // {
-    //    Debug.Log("You dragging!");
-    // }
-    //
-    // public void OnEndDrag(PointerEventData eventData)
-    // {
-    //     Debug.Log("Drag me!");
-    // }
+   
 }

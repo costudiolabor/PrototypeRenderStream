@@ -8,7 +8,7 @@ using  UnityEngine.UI;
 
 public class ScreenShoter : View , IPointerDownHandler
 {
-   [SerializeField] private ImageEditor imageEditor;
+   //[SerializeField] private ImageEditor imageEditor;
 
    
    public event Action PointerDownEvent;
@@ -17,7 +17,7 @@ public class ScreenShoter : View , IPointerDownHandler
    
    public void InitializeView()
    {
-      imageEditor.InitializeView();
+      //imageEditor.InitializeView();
       Debug.Log("Init");
 
        PointerDownEvent += OnClick;

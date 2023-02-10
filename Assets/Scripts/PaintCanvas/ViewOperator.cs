@@ -7,7 +7,7 @@ public class ViewOperator<TPrefab> where TPrefab : AnimatedView {
     [SerializeField] protected RectTransform viewParent;
     protected TPrefab view;
 
-    public virtual void InitializeView(){
+    public virtual void CreateView(){
         view = Object.Instantiate(prefab, viewParent);
         view.ForceClose();
         view.Close();

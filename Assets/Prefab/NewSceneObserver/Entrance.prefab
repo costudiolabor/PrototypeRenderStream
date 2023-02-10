@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2450311495752182388}
-  - component: {fileID: 2450311495752182391}
+  - component: {fileID: 1190496904772950514}
   m_Layer: 0
   m_Name: Entrance
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2450311495752182391
+--- !u!114 &1190496904772950514
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,13 +45,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graphicEditor:
-    prefab: {fileID: 9043596416726735273, guid: 9e33c9a3e4124ef4681bb725211bea8e, type: 3}
+    prefab: {fileID: 0}
     viewParent: {fileID: 0}
-    imageEditorModel:
-      lineFactory:
-        linePrefab: {fileID: 56282802960156226, guid: bab61ff5661a84c4fb4e82b88051cafc, type: 3}
-        arrowPrefab: {fileID: 6204102368723038970, guid: e29d42d39528008458f41a9f6f0bb8d7, type: 3}
-      screenshotPrefab: {fileID: 1608640987172346434, guid: 26d9fcd74cca1134194fc903c354eca0, type: 3}
-    stickerModel:
-      prefabSticker: {fileID: 5746579363794787963, guid: 0e38d3881bf58cb4b84a0a95a6d9cfbd, type: 3}
-      _stickers: []
+    editors:
+      lineEditor:
+        lineFactory:
+          linePrefab: {fileID: 0}
+          arrowPrefab: {fileID: 0}
+        screenshotPrefab: {fileID: 0}
+      stickerEditor:
+        prefabSticker: {fileID: 0}
