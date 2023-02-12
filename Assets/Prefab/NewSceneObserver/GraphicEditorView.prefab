@@ -211,12 +211,13 @@ MonoBehaviour:
   toolsParent: {fileID: 1497355467050194711}
   lineToggle: {fileID: 1497355467906896820}
   arrowToggle: {fileID: 1497355468277881545}
-  stickerToggle: {fileID: 4669402817467816923}
   acceptButton: {fileID: 1497355466662578159}
   cancelButton: {fileID: 1497355467872882438}
   undoButton: {fileID: 1497355468350043172}
   colorMenu: {fileID: 1497355467212573185}
   drawingCanvas: {fileID: 6207029796125851375}
+  stickerToggle: {fileID: 4669402817467816923}
+  popupDiscriptionSticker: {fileID: 1741245822986310127}
 --- !u!1 &1497355466436678997
 GameObject:
   m_ObjectHideFlags: 0
@@ -3848,13 +3849,14 @@ GameObject:
   m_Component:
   - component: {fileID: 5082362142589893833}
   - component: {fileID: 3893365915583315034}
+  - component: {fileID: 1741245822986310127}
   m_Layer: 5
-  m_Name: DiscriptionStickerParent
+  m_Name: PopupDiscriptionSticker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5082362142589893833
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3885,6 +3887,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5050753714435306952}
   m_CullTransparentMesh: 1
+--- !u!114 &1741245822986310127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5050753714435306952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b6afa3db2e6f8445bd219661a41af56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonCloseDiscriptionSticker: {fileID: 7778532814593125464}
+  inputFieldDiscription: {fileID: 3492534681552909610}
+  textDiscription: {fileID: 6972913472005982309}
 --- !u!1 &6219339253668474237
 GameObject:
   m_ObjectHideFlags: 0

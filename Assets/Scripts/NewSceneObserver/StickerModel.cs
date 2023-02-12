@@ -21,7 +21,7 @@ public class StickerModel
        sticker.Initialize();
        sticker.SetPosition(rectPoint);
        sticker.SetColorImage(_color);
-       sticker.SetSampleText(_stickers.Count + 1);
+       sticker.SetCountText(_stickers.Count + 1);
        sticker.DeleteStickerEvent += DeleteSticker;
        _stickers.Add(sticker);
     }
@@ -37,7 +37,7 @@ public class StickerModel
     {
         for(int i = 0 ; i < _stickers.Count; i++)
         {
-            _stickers[i].SetSampleText(i + 1);
+            _stickers[i].SetCountText(i + 1);
         }
     }
 }

@@ -5,13 +5,13 @@ using  UnityEngine.UI;
 
 public class ImageEditorView : AnimatedView {
     [SerializeField] private RectTransform toolsParent;
-    [SerializeField] private Toggle lineToggle, arrowToggle, stickerToggle;
+    [SerializeField] private Toggle lineToggle, arrowToggle;
     [SerializeField] private Button acceptButton, cancelButton, undoButton; 
 
     public ColorMenu colorMenu;
     public DrawingCanvas drawingCanvas;
 
-    public event Action AcceptClickedEvent, RejectClickedEvent, UndoEvent, LineSelectedEvent, ArrowSelectedEvent, StickerSelectedEvent;
+    public event Action AcceptClickedEvent, RejectClickedEvent, UndoEvent, LineSelectedEvent, ArrowSelectedEvent;
     
     private void OnLineSelect(bool isOn){
         if (!isOn) return;
@@ -22,29 +22,18 @@ public class ImageEditorView : AnimatedView {
          if (!isOn) return;
         ArrowSelectedEvent?.Invoke();
     }
-
-    private void OnStickerSelect(bool isOn){
-        if (!isOn) return;
-        StickerSelectedEvent?.Invoke();
-    }
     
-    
-    public void NotifySelectedTool(){
+    public virtual void NotifySelectedTool(){
         if (lineToggle.isOn) LineSelectedEvent?.Invoke();
         if (arrowToggle.isOn) ArrowSelectedEvent?.Invoke();
-        if (stickerToggle.isOn) StickerSelectedEvent?.Invoke();
     }
 
-    private void Awake(){
+    public virtual  void Awake(){
         acceptButton.onClick.AddListener(delegate { AcceptClickedEvent?.Invoke(); });
         cancelButton.onClick.AddListener(delegate { RejectClickedEvent?.Invoke(); });
         undoButton.onClick.AddListener(delegate { UndoEvent?.Invoke(); });
-        
         lineToggle.onValueChanged.AddListener(OnLineSelect);
         arrowToggle.onValueChanged.AddListener(OnArrowSelect);
-        stickerToggle.onValueChanged.AddListener(OnStickerSelect);
-        
-        NotifySelectedTool();
     }
 
     private void OnDestroy(){
@@ -53,6 +42,5 @@ public class ImageEditorView : AnimatedView {
         undoButton.onClick.RemoveAllListeners();
         lineToggle.onValueChanged.RemoveAllListeners();
         arrowToggle.onValueChanged.RemoveAllListeners();
-        stickerToggle.onValueChanged.RemoveAllListeners();
     }
 }
