@@ -7,7 +7,6 @@ using Object = UnityEngine.Object;
 public class LineFactory {
     [SerializeField] private Line linePrefab;
     [SerializeField] private Arrow arrowPrefab;
-   // [SerializeField] private GameObject stickerPrefab;
     private RectTransform _parent;
 
     public void SetParent(RectTransform linesParentTransform){
@@ -19,7 +18,6 @@ public class LineFactory {
         {
             (BrushType.Line) => Get(linePrefab),
             (BrushType.Arrow) => Get(arrowPrefab),
-            //(BrushType.Sticker) => Get(labelPrefab),
             _ => Get(linePrefab)
         };
     }

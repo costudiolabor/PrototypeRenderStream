@@ -8,7 +8,7 @@ public class Editors  {
      [SerializeField] private LineEditorModel lineEditor;
      [SerializeField] private StickerEditor stickerEditor;
 
-     [SerializeField] private ToolType _selectedTool;
+     private ToolType _selectedTool;
      
      public void Initialize(RectTransform parent){
           lineEditor.Initialize(parent);

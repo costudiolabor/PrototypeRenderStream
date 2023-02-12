@@ -13,7 +13,7 @@ public class LineEditorModel {
     protected Screenshot _screenshot;
     protected Drawer _drawer = new Drawer();
     protected Color _color = Color.red;
-    [SerializeField] protected BrushType brushType;
+    protected BrushType brushType;
     protected float _brushSize = 25f;
 
     public virtual void Initialize(RectTransform linesParent){
