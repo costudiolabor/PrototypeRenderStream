@@ -8,7 +8,6 @@ using Object = UnityEngine.Object;
 [Serializable]
 public class LineEditorModel {
     [SerializeField] protected LineFactory lineFactory;
-    [SerializeField] protected Screenshot screenshotPrefab;
     protected Stack<Line> _undoStack = new Stack<Line>();
     protected Screenshot _screenshot;
     protected Drawer _drawer = new Drawer();
@@ -17,12 +16,7 @@ public class LineEditorModel {
     protected float _brushSize = 25f;
 
     public virtual void Initialize(RectTransform linesParent){
-        if (!_screenshot) _screenshot = Object.Instantiate(screenshotPrefab);
         lineFactory.SetParent(linesParent);
-    }
-
-    public UniTask<Texture2D> ScreenShotTake(){
-        return _screenshot.Take();
     }
 
     public virtual void Draw(Vector2 rectPoint){

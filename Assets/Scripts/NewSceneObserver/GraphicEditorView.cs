@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 public class GraphicEditorView : ImageEditorView
 {
     [SerializeField] private Toggle stickerToggle;
-    public PopupDiscriptionSticker popupDiscriptionSticker;
+    public PopupDiscriptionSticker popupDescriptionSticker;
 
     public event Action StickerSelectedEvent;
 

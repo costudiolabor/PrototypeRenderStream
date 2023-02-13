@@ -11,6 +11,7 @@ public class ImageEditorView : AnimatedView {
     public ColorMenu colorMenu;
     public DrawingCanvas drawingCanvas;
 
+    public RectTransform tools => toolsParent;
     public event Action AcceptClickedEvent, RejectClickedEvent, UndoEvent, LineSelectedEvent, ArrowSelectedEvent;
     
     private void OnLineSelect(bool isOn){

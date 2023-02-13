@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class UIDrag : ViewBase, IDragHandler, IBeginDragHandler//, IEndDragHandler
+public class UIDrag : ViewBase, IDragHandler, IBeginDragHandler
 {
     [SerializeField] private RectTransform rectTransform;
     private Vector2 offSet;

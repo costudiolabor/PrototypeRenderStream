@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc7be6bfa432942478c3bb0118681509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screenShotHandler:
+    prefab: {fileID: -156067987382473402, guid: 5b70941cbe0f4ac4dbc02fb1a3f7108c, type: 3}
+    viewParent: {fileID: 0}
   graphicEditor:
     prefab: {fileID: 9043596416726735273, guid: 9e33c9a3e4124ef4681bb725211bea8e, type: 3}
     viewParent: {fileID: 0}
@@ -52,8 +55,6 @@ MonoBehaviour:
         lineFactory:
           linePrefab: {fileID: 56282802960156226, guid: bab61ff5661a84c4fb4e82b88051cafc, type: 3}
           arrowPrefab: {fileID: 6204102368723038970, guid: e29d42d39528008458f41a9f6f0bb8d7, type: 3}
-        screenshotPrefab: {fileID: 1608640987172346434, guid: 26d9fcd74cca1134194fc903c354eca0, type: 3}
-        brushType: 0
       stickerEditor:
         prefabSticker: {fileID: 5746579363794787963, guid: 0e38d3881bf58cb4b84a0a95a6d9cfbd, type: 3}
-      _selectedTool: 0
+    screenshotPrefab: {fileID: 1608640987172346434, guid: 26d9fcd74cca1134194fc903c354eca0, type: 3}

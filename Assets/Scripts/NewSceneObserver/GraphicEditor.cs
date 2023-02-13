@@ -1,37 +1,72 @@
 using System;
+using Object = UnityEngine.Object;
 using Cysharp.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
 public class GraphicEditor : ViewOperator<GraphicEditorView>, IDisposable {
     [SerializeField] private Editors editors;
+    [SerializeField] private Screenshot screenshotPrefab;
 
+    private  Screenshot _screenshot;
     private Color _color;
     protected float width;
-    protected UniTaskCompletionSource<Texture2D> taskCompletionSource;
+    protected UniTaskCompletionSource<Texture2D> _taskCompletionSource;
+    
+    public event Action<Texture2D> SaveScreenShotEvent;
+    public event Action TakeScreenShot;
 
     public void Initialize(){
         base.CreateView();
         SubscribeUIEvent();
-
         editors.Initialize(view.drawingCanvas.instaceParent);
-
-       SubscribeDragEvents();
-       SubscribeTapEvents();
-
+        SubscribeDragEvents();
+        SubscribeTapEvents();
+        
+        _screenshot = Object.Instantiate(screenshotPrefab);
     }
 
+    public async void OnStart()
+    {
+        view.tools.gameObject.SetActive(false);
+        TakeScreenShot.Invoke();
+        var texture = await _screenshot.Take();
+        view.tools.gameObject.SetActive(true);
+    
+        await EditProcess(texture);
+        _taskCompletionSource.TrySetResult(texture);
+    }
+
+    
     public async UniTask<Texture2D> EditProcess(Texture2D textureForEdit){
         editors.Clear();
         view.Open();
         view.drawingCanvas.backgroundTexture = textureForEdit;
-        taskCompletionSource = new UniTaskCompletionSource<Texture2D>();
-        var resultTexture = await taskCompletionSource.Task;
+        
+        _taskCompletionSource = new UniTaskCompletionSource<Texture2D>();
+        var resultTexture = await _taskCompletionSource.Task;
         view.Close();
+        
         return resultTexture;
     }
 
+    
+    
+    private async void OnAccept(){
+        view.tools.gameObject.SetActive(false);
+        TakeScreenShot.Invoke();
+        var texture = await _screenshot.Take();
+        view.tools.gameObject.SetActive(true);
+        _taskCompletionSource.TrySetResult(texture);
+        SaveScreenShotEvent?.Invoke(texture);
+    }
+
+    private void OnReject(){
+        _taskCompletionSource.TrySetCanceled();
+        view.Close();
+    }
+    
+    
     private void OnArrowSelect(){
         editors.SelectArrow();
     }
@@ -52,21 +87,11 @@ public class GraphicEditor : ViewOperator<GraphicEditorView>, IDisposable {
         editors.OnPointerDown(rectPoint);
     }
 
-    private async void OnAccept(){
-        //view.tools.Close();
-        var texture = await editors.ScreenShotTake();
-       // view.tools.Open();
-        taskCompletionSource.TrySetResult(texture);
-    }
+  
 
-    private void OnReject(){
-        taskCompletionSource.TrySetCanceled();
-        view.Close();
-    }
-
-    private void OpenPopupDiscriptionSticker(string textSticker) {
-        view.popupDiscriptionSticker.Open();
-        view.popupDiscriptionSticker.SetTextPopup(textSticker);
+    private void OpenPopupDescriptionSticker(Sticker sticker) {
+        view.popupDescriptionSticker.Open();
+        view.popupDescriptionSticker.SetTextPopup(sticker);
     }
 
     public void Dispose(){
@@ -84,7 +109,7 @@ public class GraphicEditor : ViewOperator<GraphicEditorView>, IDisposable {
         view.StickerSelectedEvent += OnStickerSelect;
         view.colorMenu.ColorChangedEvent += SetColor;
 
-        editors.stickerEditor.OpenStickerEvent += OpenPopupDiscriptionSticker;
+        editors.stickerEditor.OpenStickerEvent += OpenPopupDescriptionSticker;
     }
 
     private void UnsubscribeUIEvents(){
@@ -96,6 +121,8 @@ public class GraphicEditor : ViewOperator<GraphicEditorView>, IDisposable {
         view.UndoEvent -= editors.Undo;
         view.RejectClickedEvent -= OnReject;
         view.colorMenu.ColorChangedEvent -= SetColor;
+        
+        editors.stickerEditor.OpenStickerEvent -= OpenPopupDescriptionSticker;
     }
 
     private void SubscribeDragEvents(){

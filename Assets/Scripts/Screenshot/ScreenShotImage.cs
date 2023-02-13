@@ -6,24 +6,20 @@ using UnityEngine.UI;
 public class ScreenShotImage : MonoBehaviour, IPointerClickHandler
 {
    [SerializeField] private RawImage image;
-   private Texture _texture2D;
+   private Texture2D _texture;
 
-   public event Action<Texture> ClickImageEvent;
+   public event Action<Texture2D> ClickImageEvent;
    
-   public void SetTexture(Texture texture)
-   {
-      _texture2D = texture;
+   public void SetTexture(Texture2D texture) {
+      this._texture = texture;
       image.texture = texture;
    }
    
-   public void OnPointerClick(PointerEventData eventData)
-   {
-      ClickImageEvent?.Invoke(_texture2D);
-      //Debug.Log("Click");
+   public void OnPointerClick(PointerEventData eventData) {
+      ClickImageEvent?.Invoke(_texture);
    }
 
-   private void OnDestroy()
-   {
+   private void OnDestroy() {
       ClickImageEvent = null;
    }
 }

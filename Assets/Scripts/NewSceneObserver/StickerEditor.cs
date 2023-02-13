@@ -13,7 +13,7 @@ public class StickerEditor
     private RectTransform _linesParent;
     private Color _color = Color.red;
 
-    public event Action<string> OpenStickerEvent;
+    public event Action<Sticker> OpenStickerEvent;
 
     public void Initialize(RectTransform linesParent) {
         _linesParent = linesParent;
@@ -41,5 +41,10 @@ public class StickerEditor
             _stickers[i].SetCountText(i + 1);
         }
     }
-   
+
+    public void Clear(){
+        foreach (var sticker in _stickers)
+            Object.Destroy(sticker.gameObject);
+        _stickers.Clear();
+    }
 }

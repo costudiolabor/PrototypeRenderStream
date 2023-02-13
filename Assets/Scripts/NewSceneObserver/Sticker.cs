@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,15 +11,12 @@ public class Sticker : MonoBehaviour
    [SerializeField] private Button buttonSticker;
    [SerializeField] private Button buttonDeleteSticker;
 
-    [SerializeField] private string textSticker = "";
-   
-
-   public event Action<string> OpenStickerEvent;
+   private string _textSticker = "";
+   public event Action<Sticker> OpenStickerEvent;
    public event Action<Sticker> DeleteStickerEvent;
 
-   public void Initialize()
-   {
-      buttonSticker.onClick.AddListener(delegate { GetTextSticker(); });
+   public void Initialize() {
+      buttonSticker.onClick.AddListener(OpenSticker);
       buttonDeleteSticker.onClick.AddListener(DeleteSticker);
    }
    
@@ -31,14 +26,20 @@ public class Sticker : MonoBehaviour
 
    public void SetCountText(int count) => countText.text = count.ToString();
 
-   public void GetTextSticker() {
-        OpenStickerEvent?.Invoke(textSticker);
+   public void OpenSticker() {
+        OpenStickerEvent?.Invoke(this);
     }
 
-   private void DeleteSticker()
-   {
+   public void SetTextSticker(string textSticker) {
+      _textSticker = textSticker;
+   }
+   
+   public string GetTextSticker() {
+      return _textSticker;
+   }
+
+   private void DeleteSticker() {
       DeleteStickerEvent?.Invoke(this);
       Destroy(gameObject);
    }
-   
 }

@@ -344,6 +344,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4890711307926743644}
   - component: {fileID: 4890711307926743619}
+  - component: {fileID: 6535405498510232078}
+  - component: {fileID: 226292923030180307}
   - component: {fileID: 4890711307926743645}
   m_Layer: 5
   m_Name: Gallery
@@ -351,7 +353,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4890711307926743644
 RectTransform:
   m_ObjectHideFlags: 0
@@ -382,6 +384,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4890711307926743647}
   m_CullTransparentMesh: 1
+--- !u!95 &6535405498510232078
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4890711307926743647}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ec24d1d26f72cbc4580c2b25b3493a6d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!225 &226292923030180307
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4890711307926743647}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &4890711307926743645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,9 +428,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a903191d90a5e944bbe20cb0ed6af67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 6535405498510232078}
+  closeTrigger: disappear
   parentScreenShot: {fileID: 4890711306948226811}
-  screenShotImages: []
-  prefabScreenShotImage: {fileID: 9068482902205012532, guid: 82aeaa4f2c38a3a49959ca1e81cd1a28, type: 3}
   preview: {fileID: 1138420709}
 --- !u!1 &4890711308333816878
 GameObject:

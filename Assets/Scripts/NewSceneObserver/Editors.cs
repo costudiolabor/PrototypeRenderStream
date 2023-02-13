@@ -10,15 +10,9 @@ public class Editors  {
 
      private ToolType _selectedTool;
 
-    public void Initialize(RectTransform parent)
-    {
+    public void Initialize(RectTransform parent) {
           lineEditor.Initialize(parent);
           stickerEditor.Initialize(parent);
-     }
-     
-     public UniTask<Texture2D> ScreenShotTake(){
-          var texture =  lineEditor.ScreenShotTake();
-          return texture;
      }
      
      public void OnDrag(Vector2 position){
@@ -63,7 +57,9 @@ public class Editors  {
           lineEditor.Undo();
      }
      
-     public void Clear(){
-          
+     public void Clear()
+     {
+        stickerEditor.Clear();
+        lineEditor.Clear();
      }
 }
