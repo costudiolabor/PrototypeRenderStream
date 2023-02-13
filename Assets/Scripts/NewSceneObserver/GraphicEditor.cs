@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public class GraphicEditor : ViewOperator<GraphicEditorView>, IDisposable {
     [SerializeField] private Editors editors;
-    
+
     private Color _color;
     protected float width;
     protected UniTaskCompletionSource<Texture2D> taskCompletionSource;
@@ -64,6 +64,11 @@ public class GraphicEditor : ViewOperator<GraphicEditorView>, IDisposable {
         view.Close();
     }
 
+    private void OpenPopupDiscriptionSticker(string textSticker) {
+        view.popupDiscriptionSticker.Open();
+        view.popupDiscriptionSticker.SetTextPopup(textSticker);
+    }
+
     public void Dispose(){
         UnsubscribeAllTouchEvents();
         UnsubscribeUIEvents();
@@ -78,6 +83,8 @@ public class GraphicEditor : ViewOperator<GraphicEditorView>, IDisposable {
         view.LineSelectedEvent += OnLineSelect;
         view.StickerSelectedEvent += OnStickerSelect;
         view.colorMenu.ColorChangedEvent += SetColor;
+
+        editors.stickerEditor.OpenStickerEvent += OpenPopupDiscriptionSticker;
     }
 
     private void UnsubscribeUIEvents(){

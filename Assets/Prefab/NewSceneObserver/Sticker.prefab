@@ -365,7 +365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rectTransform: {fileID: 6212206631610816024}
   _sampleImage: {fileID: 1844796746890412064}
-  sampleText: {fileID: 6559263289743463455}
+  countText: {fileID: 6559263289743463455}
   buttonSticker: {fileID: 7678826023410998783}
   buttonDeleteSticker: {fileID: 7734418638392181882}
 --- !u!114 &6273040449421829018

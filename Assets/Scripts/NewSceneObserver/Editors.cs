@@ -1,16 +1,17 @@
 using Enums;
+using System;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
-
 
 [System.Serializable]
 public class Editors  {
      [SerializeField] private LineEditorModel lineEditor;
-     [SerializeField] private StickerEditor stickerEditor;
+     public StickerEditor stickerEditor;
 
-     [SerializeField] private ToolType _selectedTool;
-     
-     public void Initialize(RectTransform parent){
+     private ToolType _selectedTool;
+
+    public void Initialize(RectTransform parent)
+    {
           lineEditor.Initialize(parent);
           stickerEditor.Initialize(parent);
      }
