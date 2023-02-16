@@ -12,7 +12,7 @@ public class DrawingCanvas : MonoBehaviour,  IPointerDownHandler, IPointerUpHand
 
     public RectTransform instaceParent => linesParent;
     
-    public Texture2D backgroundTexture{
+    public Texture backgroundTexture{
         set => backgroundImage.texture = value;
     }
     

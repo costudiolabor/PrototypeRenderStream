@@ -223,7 +223,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 150, y: 150}
-  m_Spacing: {x: 30, y: 30}
+  m_Spacing: {x: 50, y: 50}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!1 &4890711307248915410
@@ -392,9 +392,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4890711307926743647}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ec24d1d26f72cbc4580c2b25b3493a6d, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -428,7 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a903191d90a5e944bbe20cb0ed6af67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 6535405498510232078}
+  animator: {fileID: 0}
   closeTrigger: disappear
   parentScreenShot: {fileID: 4890711306948226811}
   preview: {fileID: 1138420709}

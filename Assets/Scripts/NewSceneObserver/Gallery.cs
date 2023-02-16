@@ -12,7 +12,7 @@ public class Gallery : ViewOperator<GallaryView>
       galleryModel.ClickImageEvent += OpenPreview;
    }
 
-   public void SaveGallery(Texture2D texture) {
+   public void SaveGallery(Texture texture) {
       galleryModel.AddScreenShotImage(texture);
 
       if (galleryModel.ThereScreenshots())
@@ -26,10 +26,10 @@ public class Gallery : ViewOperator<GallaryView>
    }
 
    public void ViewClose() {
-      view.Close();
+      view.ForceClose();
    }
    
-   private void OpenPreview(Texture2D texture) {
+   private void OpenPreview(Texture texture) {
       view.OpenPreview(texture);
    }
 }

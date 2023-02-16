@@ -10,4 +10,9 @@ public class Screenshot : MonoBehaviour {
         screenShot.Apply();
         return screenShot;
     }
+    
+    public async UniTask<Texture> TakeScreenShotCapture(){
+         await UniTask.WaitForEndOfFrame(this);
+       return ScreenCapture.CaptureScreenshotAsTexture();
+    }
 }

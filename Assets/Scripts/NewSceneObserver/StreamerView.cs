@@ -2,29 +2,16 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StreamerView : MonoBehaviour
+public class StreamerView : AnimatedView
 {
     [SerializeField] private Button callUpButton;
     [SerializeField] private Button hangUpButton;
     [SerializeField] private RawImage localVideoImage;
     [SerializeField] private RawImage remoteVideoImage;
+   
+    public event Action CallUpEvent, HangUpEvent;
 
-    public  Texture LocalVideoTexture
-    {
-        set => localVideoImage.texture = value;
-    }
-    
-    public  Texture RemoteVideoTexture
-    {
-        set => remoteVideoImage.texture = value;
-    }
-
-    public event Action
-        CallUpEvent,
-        HangUpEvent;
-
-    private void Awake()
-    {
+    private void Awake() {
         callUpButton.onClick.AddListener(() => CallUpEvent?.Invoke());
         hangUpButton.onClick.AddListener(() => HangUpEvent?.Invoke());
         CallUpEvent += OnCallUpEvent;
@@ -32,16 +19,23 @@ public class StreamerView : MonoBehaviour
         OnHangUpEvent();
     }
 
-    private void OnCallUpEvent()
-    {
+    private void OnCallUpEvent() {
         callUpButton.gameObject.SetActive(false);
         hangUpButton.gameObject.SetActive(true);
     }
     
-    private void OnHangUpEvent()
-    {
+    private void OnHangUpEvent() {
         callUpButton.gameObject.SetActive(true);
         hangUpButton.gameObject.SetActive(false);
     }
+    
+    public  Texture localVideoTexture {
+        set => localVideoImage.texture = value;
+    }
+    
+    public  Texture remoteVideoTexture {
+        set => remoteVideoImage.texture = value;
+    }
+  
 }
 

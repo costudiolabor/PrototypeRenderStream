@@ -416,7 +416,7 @@ MonoBehaviour:
   scrollView: {fileID: 1508457991030496397}
   displayParent: {fileID: 4441963706037454135}
   baseText: {fileID: 42992011562252957}
-  signalingHandlerBase: []
+  signalingHandlerList: []
 --- !u!1 &5478974256622935485
 GameObject:
   m_ObjectHideFlags: 0

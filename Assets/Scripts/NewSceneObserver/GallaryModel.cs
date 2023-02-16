@@ -11,13 +11,13 @@ public class GallaryModel
     private List<ScreenShotImage> _screenShotImages = new List<ScreenShotImage>(); 
     private RectTransform _parentScreenShot;
 
-    public event Action<Texture2D> ClickImageEvent; 
+    public event Action<Texture> ClickImageEvent; 
 
     public void Initialize(RectTransform parentScreenShot) {
         _parentScreenShot = parentScreenShot;
     }
     
-    public void AddScreenShotImage(Texture2D texture2D) {
+    public void AddScreenShotImage(Texture texture2D) {
         ScreenShotImage screenShotImage = Object.Instantiate(prefabScreenShotImage, _parentScreenShot);
         screenShotImage.SetTexture(texture2D);
         screenShotImage.ClickImageEvent += ClickImageEvent;

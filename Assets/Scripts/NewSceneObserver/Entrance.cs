@@ -1,35 +1,71 @@
 using System;
 using UnityEngine;
 
-public class Entrance : MonoBehaviour
+public class Entrance : MonoBehaviour, IDisposable
 {
-    //[SerializeField] private Streamer streamer = new Streamer();
+    [SerializeField] private int _frameRate = 100; 
+    [SerializeField] private Streamer streamer;
     [SerializeField] private ScreenShotHandler screenShotHandler;
     [SerializeField] private GraphicEditor graphicEditor;
     [SerializeField] private Gallery gallery;
+    
+   // public event Action<char> CharInputEvent;
 
-    private  void Awake() {
-        //streamer.Initialize();
-        
+    private  void Awake()
+    {
+        Application.targetFrameRate = _frameRate;
         screenShotHandler.Initialize();
         graphicEditor.Initialize();
         gallery.Initialize();
+        streamer.Initialize();
         
-        screenShotHandler.PointerDownEvent += StartEditProcess;
-        graphicEditor.TakeScreenShot += CloseGallery;
-        graphicEditor.SaveScreenShotEvent += SaveGallery;
+        SubscribeEvent();
     }
 
-    public void CloseGallery() {
-        gallery.ViewClose();
+    private void CallUp() {
+        
     }
     
     private void StartEditProcess() {
+        CloseViews();
+        graphicEditor.OnStart();
         graphicEditor.OnStart();
     }
 
-    private void SaveGallery(Texture2D texture) {
-        gallery.SaveGallery(texture);
+    public void OpenViews() {
+        streamer.ViewOpen();
     }
     
+    public void CloseViews() {
+        streamer.ViewClose();
+        gallery.ViewClose();
+    }
+
+    private void SaveGallery(Texture texture) {
+        gallery.SaveGallery(texture);
+    }
+
+    private void SubscribeEvent() {
+        streamer.CallUpEvent += CallUp;
+        //streamer.HangUpEvent += HangUp;
+        streamer.CharInputEvent += graphicEditor.CharInput;
+        screenShotHandler.PointerDownEvent += StartEditProcess;
+        graphicEditor.CloseViewEvent += CloseViews;
+        graphicEditor.OpenViewEvent += OpenViews;
+        graphicEditor.SaveScreenShotEvent += SaveGallery;
+    }
+  
+    private void UnsubscribeEvents() {
+        streamer.CallUpEvent -= CallUp;
+        //streamer.HangUpEvent -= HangUp;
+        streamer.CharInputEvent -= graphicEditor.CharInput;
+        screenShotHandler.PointerDownEvent -= StartEditProcess;
+        graphicEditor.CloseViewEvent -= CloseViews;
+        graphicEditor.OpenViewEvent -= OpenViews;
+        graphicEditor.SaveScreenShotEvent -= SaveGallery;
+    }
+    
+    public void Dispose(){
+        UnsubscribeEvents();
+    }
 }

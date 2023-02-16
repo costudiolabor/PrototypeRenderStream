@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2450311495752182388}
   - component: {fileID: 1190496904772950514}
+  - component: {fileID: 1766091096927539563}
   m_Layer: 0
   m_Name: Entrance
   m_TagString: Untagged
@@ -44,6 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc7be6bfa432942478c3bb0118681509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _frameRate: 100
+  streamer:
+    prefab: {fileID: 5924564298671180383, guid: bbec480c6e18a764c826a75e18e1b362, type: 3}
+    viewParent: {fileID: 0}
+    prefabStreamerModel: {fileID: 8958509712471974142, guid: 17b286bbb0d15c449bf1a4d26e68e958, type: 3}
   screenShotHandler:
     prefab: {fileID: -156067987382473402, guid: 5b70941cbe0f4ac4dbc02fb1a3f7108c, type: 3}
     viewParent: {fileID: 0}
@@ -58,3 +64,22 @@ MonoBehaviour:
       stickerEditor:
         prefabSticker: {fileID: 5746579363794787963, guid: 0e38d3881bf58cb4b84a0a95a6d9cfbd, type: 3}
     screenshotPrefab: {fileID: 1608640987172346434, guid: 26d9fcd74cca1134194fc903c354eca0, type: 3}
+  gallery:
+    prefab: {fileID: 4890711307926743645, guid: a82c1741726e9524d92110209385ae3c, type: 3}
+    viewParent: {fileID: 0}
+    galleryModel:
+      prefabScreenShotImage: {fileID: 9068482902205012532, guid: 82aeaa4f2c38a3a49959ca1e81cd1a28, type: 3}
+--- !u!114 &1766091096927539563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2450311495752182390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bce2f7fd9085bd47a2a4b31737bdce6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fontSize: 40
+  fontColor: {r: 0.3095889, g: 1, b: 0, a: 1}

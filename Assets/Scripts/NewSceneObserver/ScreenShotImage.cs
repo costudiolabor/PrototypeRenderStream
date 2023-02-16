@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class ScreenShotImage : MonoBehaviour, IPointerClickHandler
 {
    [SerializeField] private RawImage image;
-   private Texture2D _texture;
+   private Texture _texture;
 
-   public event Action<Texture2D> ClickImageEvent;
+   public event Action<Texture> ClickImageEvent;
    
-   public void SetTexture(Texture2D texture) {
+   public void SetTexture(Texture texture) {
       this._texture = texture;
       image.texture = texture;
    }

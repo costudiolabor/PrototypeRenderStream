@@ -9,12 +9,13 @@ public class GraphicEditor : ViewOperator<GraphicEditorView>, IDisposable {
     [SerializeField] private Screenshot screenshotPrefab;
 
     private  Screenshot _screenshot;
+    private Vector2Int _screenSize;
     private Color _color;
     protected float width;
-    protected UniTaskCompletionSource<Texture2D> _taskCompletionSource;
+    protected UniTaskCompletionSource<Texture> _taskCompletionSource;
     
-    public event Action<Texture2D> SaveScreenShotEvent;
-    public event Action TakeScreenShot;
+    public event Action<Texture> SaveScreenShotEvent;
+    public event Action CloseViewEvent, OpenViewEvent;
 
     public void Initialize(){
         base.CreateView();
@@ -28,35 +29,33 @@ public class GraphicEditor : ViewOperator<GraphicEditorView>, IDisposable {
 
     public async void OnStart()
     {
-        view.tools.gameObject.SetActive(false);
-        TakeScreenShot.Invoke();
-        var texture = await _screenshot.Take();
+        view.tools.gameObject.SetActive(false); 
+        var texture = await _screenshot.TakeScreenShotCapture();
         view.tools.gameObject.SetActive(true);
-    
+        
         await EditProcess(texture);
         _taskCompletionSource.TrySetResult(texture);
     }
 
     
-    public async UniTask<Texture2D> EditProcess(Texture2D textureForEdit){
+    public async UniTask<Texture> EditProcess(Texture textureForEdit){
         editors.Clear();
         view.Open();
         view.drawingCanvas.backgroundTexture = textureForEdit;
         
-        _taskCompletionSource = new UniTaskCompletionSource<Texture2D>();
+        _taskCompletionSource = new UniTaskCompletionSource<Texture>();
         var resultTexture = await _taskCompletionSource.Task;
         view.Close();
         
         return resultTexture;
     }
-
-    
     
     private async void OnAccept(){
         view.tools.gameObject.SetActive(false);
-        TakeScreenShot.Invoke();
-        var texture = await _screenshot.Take();
+        CloseViewEvent?.Invoke();
+        var texture = await _screenshot.TakeScreenShotCapture();
         view.tools.gameObject.SetActive(true);
+        OpenViewEvent?.Invoke();
         _taskCompletionSource.TrySetResult(texture);
         SaveScreenShotEvent?.Invoke(texture);
     }
@@ -65,7 +64,6 @@ public class GraphicEditor : ViewOperator<GraphicEditorView>, IDisposable {
         _taskCompletionSource.TrySetCanceled();
         view.Close();
     }
-    
     
     private void OnArrowSelect(){
         editors.SelectArrow();
@@ -87,18 +85,22 @@ public class GraphicEditor : ViewOperator<GraphicEditorView>, IDisposable {
         editors.OnPointerDown(rectPoint);
     }
 
-  
-
     private void OpenPopupDescriptionSticker(Sticker sticker) {
         view.popupDescriptionSticker.Open();
         view.popupDescriptionSticker.SetTextPopup(sticker);
     }
 
+    public void CharInput(char charInput)
+    {
+        view.popupDescriptionSticker.SetCharInputField(charInput);
+    }
+    
+
     public void Dispose(){
         UnsubscribeAllTouchEvents();
         UnsubscribeUIEvents();
     }
-
+    
     private void SubscribeUIEvent(){
         view.AcceptClickedEvent += OnAccept;
         view.RejectClickedEvent += OnReject;
