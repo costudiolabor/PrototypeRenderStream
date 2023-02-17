@@ -430,7 +430,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   closeTrigger: disappear
-  parentScreenShot: {fileID: 4890711306948226811}
+  gallery: {fileID: 4890711307926743644}
+  parentScreenShotImage: {fileID: 4890711306948226811}
   preview: {fileID: 1138420709}
 --- !u!1 &4890711308333816878
 GameObject:
