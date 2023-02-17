@@ -42,6 +42,5 @@ public class InputKeyBoard
     
     private void OnCharInput(char charInput) {
         CharInputEvent?.Invoke(charInput);
-        Debug.Log((int)charInput);
     }
 }

@@ -1,6 +1,11 @@
+using TMPro;
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Threading;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 
 public class StreamerView : AnimatedView
 {
@@ -8,25 +13,67 @@ public class StreamerView : AnimatedView
     [SerializeField] private Button hangUpButton;
     [SerializeField] private RawImage localVideoImage;
     [SerializeField] private RawImage remoteVideoImage;
-   
+    [SerializeField] private Button buttonCloseOpenImage;
+    [SerializeField] private RectTransform panelNotice;
+    [SerializeField] private TMP_Text textNotice;
+    [SerializeField] private AudioSource audioCallExpert;
+    [SerializeField] private float timeCallExpert;
+
+    private Coroutine _refCallExpert;
+    
     public event Action CallUpEvent, HangUpEvent;
+
 
     private void Awake() {
         callUpButton.onClick.AddListener(() => CallUpEvent?.Invoke());
         hangUpButton.onClick.AddListener(() => HangUpEvent?.Invoke());
+        buttonCloseOpenImage.onClick.AddListener(CloseOpenRemoveImage); 
+        callUpButton.gameObject.SetActive(true);
+        hangUpButton.gameObject.SetActive(false); 
         CallUpEvent += OnCallUpEvent;
         HangUpEvent += OnHangUpEvent;
+    }
+
+    private void  CloseOpenRemoveImage() {
+        remoteVideoImage.gameObject.SetActive(!remoteVideoImage.gameObject.activeInHierarchy);
+    }
+    
+    public void SetNotice(string text) {
+      panelNotice.gameObject.SetActive(true);
+      textNotice.text = text;
+    }
+
+    public void StartInputReceiver(string id) {
+        Disconnect();
+    }
+    
+    public void StoppedInputReceiver(string id) {
         OnHangUpEvent();
+        SetNotice("Эксперт не отвечает \n\n ID: " + id);
     }
 
     private void OnCallUpEvent() {
         callUpButton.gameObject.SetActive(false);
         hangUpButton.gameObject.SetActive(true);
+        panelNotice.gameObject.SetActive(false);
+        Connect();
     }
     
     private void OnHangUpEvent() {
         callUpButton.gameObject.SetActive(true);
-        hangUpButton.gameObject.SetActive(false);
+        hangUpButton.gameObject.SetActive(false); 
+        Disconnect();
+        SetNotice("Эксперт не отвечает");
+    }
+
+    private void Connect() {
+        audioCallExpert.Play();
+        _refCallExpert = StartCoroutine(CallExpert()) ;
+    }
+
+    private void Disconnect() {
+        audioCallExpert.Stop();
+        StopCoroutine(_refCallExpert);
     }
     
     public  Texture localVideoTexture {
@@ -36,6 +83,10 @@ public class StreamerView : AnimatedView
     public  Texture remoteVideoTexture {
         set => remoteVideoImage.texture = value;
     }
-  
+
+    IEnumerator CallExpert() {
+        yield return new WaitForSeconds(timeCallExpert);
+        HangUpEvent?.Invoke();
+    }
 }
 

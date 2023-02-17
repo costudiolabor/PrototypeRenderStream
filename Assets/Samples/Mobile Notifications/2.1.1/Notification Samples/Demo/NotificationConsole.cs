@@ -12,8 +12,8 @@ namespace NotificationSamples.Demo
     /// </summary>
     public class NotificationConsole : MonoBehaviour
     {
-        // On iOS, this represents the notification's Category Identifier, and is optional
-        // On Android, this represents the notification's channel, and is required (at least one).
+        // OnStoppedInputReceiverEvent iOS, this represents the notification's Category Identifier, and is optional
+        // OnStoppedInputReceiverEvent Android, this represents the notification's channel, and is required (at least one).
         // Channels defined as global constants so can be referred to from GameController.cs script when setting/sending notification
         public const string ChannelId = "game_channel0";
         public const string ReminderChannelId = "reminder_channel1";

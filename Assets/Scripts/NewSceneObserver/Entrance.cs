@@ -3,27 +3,21 @@ using UnityEngine;
 
 public class Entrance : MonoBehaviour, IDisposable
 {
-    [SerializeField] private int _frameRate = 100; 
+    [SerializeField] private int frameRate = 100; 
     [SerializeField] private Streamer streamer;
     [SerializeField] private ScreenShotHandler screenShotHandler;
     [SerializeField] private GraphicEditor graphicEditor;
     [SerializeField] private Gallery gallery;
-    
-   // public event Action<char> CharInputEvent;
 
-    private  void Awake()
-    {
-        Application.targetFrameRate = _frameRate;
+    private  void Awake() {
+        Application.targetFrameRate = frameRate;
+        
         screenShotHandler.Initialize();
         graphicEditor.Initialize();
         gallery.Initialize();
         streamer.Initialize();
         
         SubscribeEvent();
-    }
-
-    private void CallUp() {
-        
     }
     
     private void StartEditProcess() {
@@ -32,11 +26,11 @@ public class Entrance : MonoBehaviour, IDisposable
         graphicEditor.OnStart();
     }
 
-    public void OpenViews() {
+    private void OpenViews() {
         streamer.ViewOpen();
     }
-    
-    public void CloseViews() {
+
+    private void CloseViews() {
         streamer.ViewClose();
         gallery.ViewClose();
     }
@@ -46,8 +40,6 @@ public class Entrance : MonoBehaviour, IDisposable
     }
 
     private void SubscribeEvent() {
-        streamer.CallUpEvent += CallUp;
-        //streamer.HangUpEvent += HangUp;
         streamer.CharInputEvent += graphicEditor.CharInput;
         screenShotHandler.PointerDownEvent += StartEditProcess;
         graphicEditor.CloseViewEvent += CloseViews;
@@ -56,8 +48,6 @@ public class Entrance : MonoBehaviour, IDisposable
     }
   
     private void UnsubscribeEvents() {
-        streamer.CallUpEvent -= CallUp;
-        //streamer.HangUpEvent -= HangUp;
         streamer.CharInputEvent -= graphicEditor.CharInput;
         screenShotHandler.PointerDownEvent -= StartEditProcess;
         graphicEditor.CloseViewEvent -= CloseViews;

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2450311495752182388}
   - component: {fileID: 1190496904772950514}
-  - component: {fileID: 1766091096927539563}
   m_Layer: 0
   m_Name: Entrance
   m_TagString: Untagged
@@ -69,17 +68,3 @@ MonoBehaviour:
     viewParent: {fileID: 0}
     galleryModel:
       prefabScreenShotImage: {fileID: 9068482902205012532, guid: 82aeaa4f2c38a3a49959ca1e81cd1a28, type: 3}
---- !u!114 &1766091096927539563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2450311495752182390}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bce2f7fd9085bd47a2a4b31737bdce6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fontSize: 40
-  fontColor: {r: 0.3095889, g: 1, b: 0, a: 1}

@@ -19,7 +19,7 @@ namespace NotificationSamples.Android
 
         /// <inheritdoc />
         /// <summary>
-        /// On Android, if the ID isn't explicitly set, it will be generated after it has been scheduled.
+        /// OnStoppedInputReceiverEvent Android, if the ID isn't explicitly set, it will be generated after it has been scheduled.
         /// </summary>
         public int? Id { get; set; }
 
@@ -39,7 +39,7 @@ namespace NotificationSamples.Android
 
         /// <inheritdoc />
         /// <remarks>
-        /// On Android, this represents the notification's channel, and is required. Will be configured automatically by
+        /// OnStoppedInputReceiverEvent Android, this represents the notification's channel, and is required. Will be configured automatically by
         /// <see cref="AndroidNotificationsPlatform"/> if <see cref="AndroidNotificationsPlatform.DefaultChannelId"/> is set
         /// </remarks>
         /// <value>The value of <see cref="DeliveredChannel"/>.</value>

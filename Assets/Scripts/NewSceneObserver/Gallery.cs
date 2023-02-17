@@ -10,11 +10,15 @@ public class Gallery : ViewOperator<GallaryView>
       base.CreateView();
       galleryModel.Initialize(view.GetParent());
       galleryModel.ClickImageEvent += OpenPreview;
+      galleryModel.DestroyImageEvent += CheckGallery;
    }
 
    public void SaveGallery(Texture texture) {
       galleryModel.AddScreenShotImage(texture);
+      CheckGallery();
+   }
 
+   private void CheckGallery() {
       if (galleryModel.ThereScreenshots())
          ViewOpen();
       else

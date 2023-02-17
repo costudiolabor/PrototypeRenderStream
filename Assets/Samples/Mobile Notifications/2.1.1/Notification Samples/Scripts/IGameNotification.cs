@@ -15,7 +15,7 @@ namespace NotificationSamples
         /// If null, will be generated automatically once the notification is delivered, and then
         /// can be retrieved afterwards.
         /// </para>
-        /// <para>On some platforms, this might be converted to a string identifier internally.</para>
+        /// <para>OnStoppedInputReceiverEvent some platforms, this might be converted to a string identifier internally.</para>
         /// </remarks>
         /// <value>A unique integer identifier for this notification, or null (on some platforms) if not explicitly set.</value>
         int? Id { get; set; }

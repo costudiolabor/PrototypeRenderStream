@@ -7,7 +7,7 @@ namespace NotificationSamples
     /// Cross-platform wrapper to represent channels for notifications.
     /// </summary>
     /// <remarks>
-    /// <para>On Android, this maps pretty closely to Android Notification Channels. On iOS, this does nothing.</para>
+    /// <para>OnStoppedInputReceiverEvent Android, this maps pretty closely to Android Notification Channels. OnStoppedInputReceiverEvent iOS, this does nothing.</para>
     /// <para>For projects targeting Android, you need to have at least one channel.</para>
     /// </remarks>
     public struct GameNotificationChannel

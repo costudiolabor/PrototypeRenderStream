@@ -7,10 +7,9 @@ using TMPro;
 public class PopupDiscriptionSticker : View
 {
     [SerializeField] private Button buttonCloseDescriptionSticker;
-    // [SerializeField] private InputField inputFieldDescription;
-    // [SerializeField] private Text textDescription;
     [SerializeField] private  TMP_InputField inputFieldDescription;
     [SerializeField] private TMP_Text textDescription;
+    private const int  KeyCodeBackSpace = (int)KeyCode.Backspace;
 
     private Sticker _sticker;
 
@@ -20,8 +19,8 @@ public class PopupDiscriptionSticker : View
         Close();
     }
 
-    public void SetCharInputField(char charInput) {
-        inputFieldDescription.text = inputFieldDescription.text + charInput;
+    public void SetCharInputField(char inputChar) {
+        CheckCorrectInput(inputChar);
     }
 
     public void SetTextPopup(Sticker sticker) {
@@ -30,6 +29,7 @@ public class PopupDiscriptionSticker : View
     }
 
     private void ValueChangeCheck() {
+        if (!_sticker) return;
         _sticker.SetTextSticker(textDescription.text.ToString());
     }
 
@@ -37,5 +37,15 @@ public class PopupDiscriptionSticker : View
         _sticker.SetTextSticker(textDescription.text.ToString());
         Close();
     }
-    
+
+    private void CheckCorrectInput(char inputChar) {
+        if ((int)inputChar == KeyCodeBackSpace) {
+            if (inputFieldDescription.text.Length == 0) return;
+            var currentText = inputFieldDescription.text; 
+            var lastChar = inputFieldDescription.text.Length - 1;
+            inputFieldDescription.text = currentText.Remove(lastChar);
+        }
+        else 
+            inputFieldDescription.text += inputChar;
+    }
 }

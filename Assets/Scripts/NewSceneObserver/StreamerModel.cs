@@ -1,9 +1,6 @@
 using System;
-using Unity.RenderStreaming;
-using Unity.RenderStreaming.Signaling;
-using Unity.WebRTC;
 using UnityEngine;
-using static UnityEngine.Debug;
+using Unity.RenderStreaming;
 
 public class StreamerModel : MonoBehaviour
 {
@@ -16,13 +13,18 @@ public class StreamerModel : MonoBehaviour
     [SerializeField] private AudioStreamSender microphoneStreamer;
     [SerializeField] private AudioSource receiveAudioSource;
     [SerializeField] private InputReceiver inputReceiver;
+    
 #pragma warning restore 0649
-
-    [SerializeField] private string _connectionId;
+    
+    [SerializeField] private string connectionId;
+    
     private Vector2Int _screenSize;
     private InputKeyBoard _inputKeyBoard;
+    private Coroutine _refCallExpert;
+
     public event Action<Texture> OnUpdateReceiveTextureEvent, OnUpdateLocalTextureEvent;
     public event Action<char> CharInputEvent;
+    public event Action<string>  OnStoppedInputReceiverEvent, OnStartInputReceiverEvent;
     
     public void Awake()
     {
@@ -32,21 +34,21 @@ public class StreamerModel : MonoBehaviour
         _inputKeyBoard.Initialize(inputReceiver);
         _inputKeyBoard.CharInputEvent += context => CharInputEvent?.Invoke(context);
         
-       // _connectionId = "00000";
-        
         receiveVideoViewer.OnUpdateReceiveTexture += texture => OnUpdateReceiveTextureEvent?.Invoke(texture);
-        
-        // videoStreamSender.OnStartedStream += id => { receiveVideoViewer.enabled = true;
-        //     //OnUpdateLocalTextureEvent?.Invoke(videoStreamSender.sourceWebCamTexture);
-        // };
-
-        receiveVideoViewer.OnStartedStream += id => { inputReceiver.OnStartedChannel += OnStartedChannel;};
+        //receiveVideoViewer.OnStartedStream += id => { inputReceiver.OnStartedChannel += OnStartedChannel;};
         receiveAudioViewer.targetAudioSource = receiveAudioSource;
-        
+
         receiveAudioViewer.OnUpdateReceiveAudioSource += source => {
             source.loop = true;
             source.Play();
         };
+    }
+    
+    void Start() {
+        if (renderStreaming.runOnAwake)
+            return;
+        renderStreaming.Run();
+        inputReceiver.OnStartedChannel += OnStartedChannel;
     }
 
     private void SetVideoStreamSize() {
@@ -56,13 +58,6 @@ public class StreamerModel : MonoBehaviour
         videoStreamSender.height = (uint)_screenSize.y;
     }
     
-    void Start() {
-        if (renderStreaming.runOnAwake)
-            return;
-        renderStreaming.Run();
-        //inputReceiver.OnStartedChannel += OnStartedChannel;
-    }
-
     private void OnStartedChannel(string connectionId) {
         Rect rect = new Rect(0, 0, _screenSize.x, _screenSize.y);
         inputReceiver.SetInputRange(new Vector2Int(_screenSize.x, _screenSize.y), rect);
@@ -72,11 +67,22 @@ public class StreamerModel : MonoBehaviour
     public void CallUp() {
         videoStreamSender.enabled = true;
         microphoneStreamer.enabled = true;
-        singleConnection.CreateConnection(_connectionId);
+        singleConnection.CreateConnection(connectionId);
+        inputReceiver.OnStartedChannel += OnStartedInputReceiver;
+        inputReceiver.OnStoppedChannel += OnStoppedInputReceiver;
     }
 
+   
     public void HangUp() {
-        singleConnection.DeleteConnection(_connectionId);
+        singleConnection.DeleteConnection(connectionId);
+    }
+
+    private void OnStartedInputReceiver(string id) {
+        OnStartInputReceiverEvent?.Invoke(id);
+    }
+    
+    private void OnStoppedInputReceiver(string id) {
+        OnStoppedInputReceiverEvent?.Invoke(id);
     }
 }
 

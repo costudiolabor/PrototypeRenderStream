@@ -23,7 +23,6 @@ public class GraphicEditor : ViewOperator<GraphicEditorView>, IDisposable {
         editors.Initialize(view.drawingCanvas.instaceParent);
         SubscribeDragEvents();
         SubscribeTapEvents();
-        
         _screenshot = Object.Instantiate(screenshotPrefab);
     }
 
@@ -32,7 +31,6 @@ public class GraphicEditor : ViewOperator<GraphicEditorView>, IDisposable {
         view.tools.gameObject.SetActive(false); 
         var texture = await _screenshot.TakeScreenShotCapture();
         view.tools.gameObject.SetActive(true);
-        
         await EditProcess(texture);
         _taskCompletionSource.TrySetResult(texture);
     }
@@ -42,11 +40,9 @@ public class GraphicEditor : ViewOperator<GraphicEditorView>, IDisposable {
         editors.Clear();
         view.Open();
         view.drawingCanvas.backgroundTexture = textureForEdit;
-        
         _taskCompletionSource = new UniTaskCompletionSource<Texture>();
         var resultTexture = await _taskCompletionSource.Task;
         view.Close();
-        
         return resultTexture;
     }
     
@@ -90,11 +86,9 @@ public class GraphicEditor : ViewOperator<GraphicEditorView>, IDisposable {
         view.popupDescriptionSticker.SetTextPopup(sticker);
     }
 
-    public void CharInput(char charInput)
-    {
+    public void CharInput(char charInput) {
         view.popupDescriptionSticker.SetCharInputField(charInput);
     }
-    
 
     public void Dispose(){
         UnsubscribeAllTouchEvents();
@@ -105,12 +99,10 @@ public class GraphicEditor : ViewOperator<GraphicEditorView>, IDisposable {
         view.AcceptClickedEvent += OnAccept;
         view.RejectClickedEvent += OnReject;
         view.UndoEvent += editors.Undo;
-
         view.ArrowSelectedEvent += OnArrowSelect;
         view.LineSelectedEvent += OnLineSelect;
         view.StickerSelectedEvent += OnStickerSelect;
         view.colorMenu.ColorChangedEvent += SetColor;
-
         editors.stickerEditor.OpenStickerEvent += OpenPopupDescriptionSticker;
     }
 
@@ -118,12 +110,10 @@ public class GraphicEditor : ViewOperator<GraphicEditorView>, IDisposable {
         view.ArrowSelectedEvent -= editors.SelectArrow;
         view.LineSelectedEvent -= editors.LineSelect;
         view.StickerSelectedEvent -= OnStickerSelect;
-
         view.AcceptClickedEvent -= OnAccept;
         view.UndoEvent -= editors.Undo;
         view.RejectClickedEvent -= OnReject;
         view.colorMenu.ColorChangedEvent -= SetColor;
-        
         editors.stickerEditor.OpenStickerEvent -= OpenPopupDescriptionSticker;
     }
 

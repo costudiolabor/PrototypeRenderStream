@@ -60,7 +60,7 @@ namespace NotificationSamples.iOS
 
         /// <inheritdoc />
         /// <remarks>
-        /// On iOS, this represents the notification's Category Identifier.
+        /// OnStoppedInputReceiverEvent iOS, this represents the notification's Category Identifier.
         /// </remarks>
         /// <value>The value of <see cref="CategoryIdentifier"/>.</value>
         public string Group { get => CategoryIdentifier; set => CategoryIdentifier = value; }
@@ -80,7 +80,7 @@ namespace NotificationSamples.iOS
 
         /// <inheritdoc />
         /// <remarks>
-        /// <para>On iOS, setting this causes the notification to be delivered on a calendar time.</para>
+        /// <para>OnStoppedInputReceiverEvent iOS, setting this causes the notification to be delivered on a calendar time.</para>
         /// <para>If it has previously been manually set to a different type of trigger, or has not been set before,
         /// this returns null.</para>
         /// <para>The millisecond component of the provided DateTime is ignored.</para>

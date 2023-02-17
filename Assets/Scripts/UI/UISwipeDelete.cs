@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -9,7 +9,9 @@ public class UISwipeDelete : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     [SerializeField] private float offsetDelete;
     private Vector2 _offSet;
     private Vector2 _startPosition;
-
+    
+    public event Action DestroyImageEvent;
+    
     public void OnBeginDrag(PointerEventData eventData) {
         _startPosition = rectTransform.position;
         _offSet = eventData.pointerCurrentRaycast.screenPosition - new Vector2(_startPosition.x, _startPosition.y);
@@ -22,9 +24,11 @@ public class UISwipeDelete : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     }
 
     public void OnEndDrag(PointerEventData eventData) {
-        if (rectTransform.position.y - _startPosition.y > offsetDelete) 
-            Destroy(this.gameObject);
-        else 
+        if (rectTransform.position.y - _startPosition.y > offsetDelete) {
+            DestroyImageEvent?.Invoke();
+        }
+        else {
             rectTransform.position = _startPosition;
+        }
     }
 }
