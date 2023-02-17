@@ -9,10 +9,18 @@ public class UISwipeDelete : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     [SerializeField] private float offsetDelete;
     private Vector2 _offSet;
     private Vector2 _startPosition;
+    private RectTransform _transformGallery;
+    private Transform _lastParent;
     
     public event Action DestroyImageEvent;
     
+    public void SetGallery(RectTransform transformGallery) {
+        _transformGallery = transformGallery;
+    }
+    
     public void OnBeginDrag(PointerEventData eventData) {
+        _lastParent = gameObject.transform.parent;
+        gameObject.transform.SetParent(_transformGallery);
         _startPosition = rectTransform.position;
         _offSet = eventData.pointerCurrentRaycast.screenPosition - new Vector2(_startPosition.x, _startPosition.y);
     }
@@ -29,6 +37,7 @@ public class UISwipeDelete : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
         }
         else {
             rectTransform.position = _startPosition;
+            gameObject.transform.SetParent(_lastParent);
         }
     }
 }

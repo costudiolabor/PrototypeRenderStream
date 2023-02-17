@@ -12,8 +12,12 @@ public class ScreenShotImage : MonoBehaviour, IPointerClickHandler
    public event Action<Texture> ClickImageEvent;
    public event Action<ScreenShotImage> DestroyImageEvent;
 
+   public void SetGallery(RectTransform transformGallery) {
+      uiSwipeDelete.SetGallery(transformGallery);
+   }
+
    public void SetTexture(Texture texture) {
-      this._texture = texture;
+      _texture = texture;
       image.texture = texture;
       uiSwipeDelete.DestroyImageEvent += DestroyScreenShotImage;
    }

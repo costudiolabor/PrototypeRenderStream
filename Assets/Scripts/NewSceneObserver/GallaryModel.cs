@@ -8,17 +8,23 @@ public class GallaryModel {
     [SerializeField] private ScreenShotImage prefabScreenShotImage;
 
     private List<ScreenShotImage> _screenShotImages = new List<ScreenShotImage>(); 
-    private RectTransform _parentScreenShot;
+    private RectTransform _parentScreenShotImage;
+    private RectTransform _transformGallery;
 
     public event Action<Texture> ClickImageEvent; 
     public event Action DestroyImageEvent;
 
     public void Initialize(RectTransform parentScreenShot) {
-        _parentScreenShot = parentScreenShot;
+        _parentScreenShotImage = parentScreenShot;
+    }
+
+    public void SetTransformGallery(RectTransform gallery) {
+        _transformGallery = gallery;
     }
     
     public void AddScreenShotImage(Texture texture2D) {
-        ScreenShotImage screenShotImage = Object.Instantiate(prefabScreenShotImage, _parentScreenShot);
+        ScreenShotImage screenShotImage = Object.Instantiate(prefabScreenShotImage, _parentScreenShotImage);
+        screenShotImage.SetGallery(_transformGallery);
         screenShotImage.SetTexture(texture2D);
         screenShotImage.ClickImageEvent += ClickImageEvent;
         screenShotImage.DestroyImageEvent += DestroyScreenShotImage;

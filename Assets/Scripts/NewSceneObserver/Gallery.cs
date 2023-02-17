@@ -8,7 +8,8 @@ public class Gallery : ViewOperator<GallaryView>
    
    public void Initialize(){
       base.CreateView();
-      galleryModel.Initialize(view.GetParent());
+      galleryModel.Initialize(view.GetParentScreenShotImage());
+      galleryModel.SetTransformGallery(view.GetTransformGallery());
       galleryModel.ClickImageEvent += OpenPreview;
       galleryModel.DestroyImageEvent += CheckGallery;
    }
