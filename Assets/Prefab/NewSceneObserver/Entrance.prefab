@@ -44,10 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc7be6bfa432942478c3bb0118681509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _frameRate: 100
+  frameRate: 100
   streamer:
     prefab: {fileID: 5924564298671180383, guid: bbec480c6e18a764c826a75e18e1b362, type: 3}
     viewParent: {fileID: 0}
+    timeCallExpert: 0
     prefabStreamerModel: {fileID: 8958509712471974142, guid: 17b286bbb0d15c449bf1a4d26e68e958, type: 3}
   screenShotHandler:
     prefab: {fileID: -156067987382473402, guid: 5b70941cbe0f4ac4dbc02fb1a3f7108c, type: 3}

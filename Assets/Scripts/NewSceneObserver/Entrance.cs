@@ -23,7 +23,6 @@ public class Entrance : MonoBehaviour, IDisposable
     private void StartEditProcess() {
         CloseViews();
         graphicEditor.OnStart();
-        graphicEditor.OnStart();
     }
 
     private void OpenViews() {

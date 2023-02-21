@@ -23,6 +23,13 @@ public class StreamerView : AnimatedView
     
     public event Action CallUpEvent, HangUpEvent;
 
+    public  Texture localVideoTexture {
+        set => localVideoImage.texture = value;
+    }
+    
+    public  Texture remoteVideoTexture {
+        set => remoteVideoImage.texture = value;
+    }
 
     private void Awake() {
         callUpButton.onClick.AddListener(() => CallUpEvent?.Invoke());
@@ -30,8 +37,8 @@ public class StreamerView : AnimatedView
         buttonCloseOpenImage.onClick.AddListener(CloseOpenRemoveImage); 
         callUpButton.gameObject.SetActive(true);
         hangUpButton.gameObject.SetActive(false); 
-        CallUpEvent += OnCallUpEvent;
-        HangUpEvent += OnHangUpEvent;
+        CallUpEvent += OnCallUp;
+        HangUpEvent += OnHangUp;
     }
 
     private void  CloseOpenRemoveImage() {
@@ -48,18 +55,18 @@ public class StreamerView : AnimatedView
     }
     
     public void StoppedInputReceiver(string id) {
-        OnHangUpEvent();
+        OnHangUp();
         SetNotice("Эксперт не отвечает \n\n ID: " + id);
     }
 
-    private void OnCallUpEvent() {
+    private void OnCallUp() {
         callUpButton.gameObject.SetActive(false);
         hangUpButton.gameObject.SetActive(true);
         panelNotice.gameObject.SetActive(false);
         Connect();
     }
     
-    private void OnHangUpEvent() {
+    private void OnHangUp() {
         callUpButton.gameObject.SetActive(true);
         hangUpButton.gameObject.SetActive(false); 
         Disconnect();
@@ -76,13 +83,6 @@ public class StreamerView : AnimatedView
         StopCoroutine(_refCallExpert);
     }
     
-    public  Texture localVideoTexture {
-        set => localVideoImage.texture = value;
-    }
-    
-    public  Texture remoteVideoTexture {
-        set => remoteVideoImage.texture = value;
-    }
 
     IEnumerator CallExpert() {
         yield return new WaitForSeconds(timeCallExpert);

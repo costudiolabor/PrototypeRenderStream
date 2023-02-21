@@ -24,6 +24,7 @@ public class Gallery : ViewOperator<GallaryView>
          ViewOpen();
       else
          ViewClose();
+      ClosePreview();
    }
 
    public void ViewOpen() {
@@ -36,5 +37,9 @@ public class Gallery : ViewOperator<GallaryView>
    
    private void OpenPreview(Texture texture) {
       view.OpenPreview(texture);
+   }
+
+   private void ClosePreview() {
+      view.ClosePreview();
    }
 }

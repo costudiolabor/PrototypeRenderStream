@@ -1,10 +1,12 @@
 using System;
 using UnityEngine;
+using System.Collections;
 using Object = UnityEngine.Object;
 
 [Serializable]
 public class Streamer : ViewOperator<StreamerView>
-{
+{ 
+  [SerializeField] private float timeCallExpert;
   [SerializeField] private StreamerModel prefabStreamerModel;
   private StreamerModel _streamerModel;
   
@@ -46,5 +48,10 @@ public class Streamer : ViewOperator<StreamerView>
   public void Disable() {
       view.CallUpEvent -= _streamerModel.CallUp;
       view.HangUpEvent -= _streamerModel.HangUp;
+  }
+  
+  IEnumerator CallExpert() {
+      yield return new WaitForSeconds(timeCallExpert);
+     // HangUpEvent?.Invoke();
   }
 }

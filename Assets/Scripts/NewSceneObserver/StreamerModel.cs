@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using Unity.RenderStreaming;
 
@@ -13,10 +14,12 @@ public class StreamerModel : MonoBehaviour
     [SerializeField] private AudioStreamSender microphoneStreamer;
     [SerializeField] private AudioSource receiveAudioSource;
     [SerializeField] private InputReceiver inputReceiver;
+    [SerializeField] private InputSenderData inputSenderData;
     
 #pragma warning restore 0649
     
     [SerializeField] private string connectionId;
+    [SerializeField] private int dialTime;
     
     private Vector2Int _screenSize;
     private InputKeyBoard _inputKeyBoard;
@@ -48,6 +51,14 @@ public class StreamerModel : MonoBehaviour
         if (renderStreaming.runOnAwake)
             return;
         renderStreaming.Run();
+        
+        inputSenderData.OnStartedChannel += id =>
+        {
+            Debug.Log("StartInputSenderData " + id);
+            StartCoroutine(SendMessage());
+        };
+
+        
         inputReceiver.OnStartedChannel += OnStartedChannel;
     }
 
@@ -58,7 +69,7 @@ public class StreamerModel : MonoBehaviour
         videoStreamSender.height = (uint)_screenSize.y;
     }
     
-    private void OnStartedChannel(string connectionId) {
+    private void OnStartedChannel(string channelId) {
         Rect rect = new Rect(0, 0, _screenSize.x, _screenSize.y);
         inputReceiver.SetInputRange(new Vector2Int(_screenSize.x, _screenSize.y), rect);
         inputReceiver.SetEnableInputPositionCorrection(true);
@@ -70,11 +81,13 @@ public class StreamerModel : MonoBehaviour
         singleConnection.CreateConnection(connectionId);
         inputReceiver.OnStartedChannel += OnStartedInputReceiver;
         inputReceiver.OnStoppedChannel += OnStoppedInputReceiver;
+        
     }
-
    
     public void HangUp() {
         singleConnection.DeleteConnection(connectionId);
+        inputReceiver.OnStartedChannel -= OnStartedInputReceiver;
+        inputReceiver.OnStoppedChannel -= OnStoppedInputReceiver;
     }
 
     private void OnStartedInputReceiver(string id) {
@@ -84,6 +97,17 @@ public class StreamerModel : MonoBehaviour
     private void OnStoppedInputReceiver(string id) {
         OnStoppedInputReceiverEvent?.Invoke(id);
     }
+
+    IEnumerator SendMessage()
+    {
+        while (true)
+        {
+             yield return new WaitForSeconds(1.0f);
+                    inputSenderData.Send("dkjkgkj");
+        }
+       
+    }
+    
 }
 
 

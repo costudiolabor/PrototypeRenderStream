@@ -5,11 +5,6 @@ public class GallaryView : AnimatedView
     [SerializeField] private RectTransform gallery;
     [SerializeField] private RectTransform parentScreenShotImage;
     [SerializeField] private Preview preview;
-  
-    public void OpenPreview(Texture texture) {
-        preview.Open();
-        preview.SetRawImage(texture);
-    }
 
     public RectTransform GetParentScreenShotImage() {
         return parentScreenShotImage;
@@ -17,5 +12,13 @@ public class GallaryView : AnimatedView
 
     public RectTransform GetTransformGallery() {
         return gallery;
+    }
+    public void OpenPreview(Texture texture) {
+             preview.Open();
+             preview.SetRawImage(texture);
+    }
+
+    public void ClosePreview() {
+        preview.Close();
     }
 }
