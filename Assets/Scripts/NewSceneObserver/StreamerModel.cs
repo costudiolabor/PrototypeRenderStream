@@ -98,13 +98,15 @@ public class StreamerModel : MonoBehaviour
         OnStoppedInputReceiverEvent?.Invoke(id);
     }
 
-    IEnumerator SendMessage()
-    {
-        while (true)
-        {
-             yield return new WaitForSeconds(1.0f);
-                    inputSenderData.Send("dkjkgkj");
-        }
+    IEnumerator SendMessage() {
+        // MessageData messageData = new MessageData();
+        // messageData.id = 123456;
+        //
+        // while (true) {
+              yield return new WaitForSeconds(1.0f);
+        //      var message = JsonUtility.ToJson(messageData);
+        //             inputSenderData.Send(message);
+        // }
        
     }
     
