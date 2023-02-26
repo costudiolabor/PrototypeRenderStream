@@ -9,9 +9,9 @@ namespace Unity.RenderStreaming.Samples
     {
         [SerializeField] GameObject prefab;
 
-        private List<string> connectionIds = new List<string>();
-        private List<Component> streams = new List<Component>();
-        private Dictionary<string, GameObject> dictObj = new Dictionary<string, GameObject>();
+       [SerializeField] private List<string> connectionIds = new List<string>();
+        [SerializeField] private List<Component> streams = new List<Component>();
+        [SerializeField] private Dictionary<string, GameObject> dictObj = new Dictionary<string, GameObject>();
 
         private RenderStreamingSettings settings;
 

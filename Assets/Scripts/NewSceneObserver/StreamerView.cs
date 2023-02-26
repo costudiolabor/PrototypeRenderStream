@@ -56,7 +56,7 @@ public class StreamerView : AnimatedView
     
     public void StoppedInputReceiver(string id) {
         OnHangUp();
-        SetNotice("Эксперт не отвечает \n\n ID: " + id);
+        SetNotice("Абонент не отвечает \n\n ID: " + id);
     }
 
     private void OnCallUp() {
@@ -70,11 +70,11 @@ public class StreamerView : AnimatedView
         callUpButton.gameObject.SetActive(true);
         hangUpButton.gameObject.SetActive(false); 
         Disconnect();
-        SetNotice("Эксперт не отвечает");
+        SetNotice("Абонент не отвечает");
     }
 
     private void Connect() {
-        audioCallExpert.Play();
+        //audioCallExpert.Play();
         _refCallExpert = StartCoroutine(CallExpert()) ;
     }
 
@@ -86,7 +86,7 @@ public class StreamerView : AnimatedView
 
     IEnumerator CallExpert() {
         yield return new WaitForSeconds(timeCallExpert);
-        HangUpEvent?.Invoke();
+        //HangUpEvent?.Invoke();
     }
 }
 

@@ -1,6 +1,5 @@
 using System;
 using Unity.RenderStreaming;
-using UnityEngine;
 
 public class InputReceiverData : DataChannelBase {
     public event Action<byte[]> OnMessageEvent; 

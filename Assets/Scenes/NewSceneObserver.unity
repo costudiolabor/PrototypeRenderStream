@@ -518,6 +518,10 @@ PrefabInstance:
       propertyPath: screenShotHandler.viewParent
       value: 
       objectReference: {fileID: 5146193}
+    - target: {fileID: 1190496904772950514, guid: f9b8f58dabb524042a60fe7fb1447046, type: 3}
+      propertyPath: streamer.prefabStreamerModel
+      value: 
+      objectReference: {fileID: 8168702953675516565, guid: bee14894089c6dc4497d46a6eac3ca4c, type: 3}
     - target: {fileID: 2450311495752182388, guid: f9b8f58dabb524042a60fe7fb1447046, type: 3}
       propertyPath: m_RootOrder
       value: 5

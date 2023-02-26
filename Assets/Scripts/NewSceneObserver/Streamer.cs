@@ -7,10 +7,14 @@ using Object = UnityEngine.Object;
 public class Streamer : ViewOperator<StreamerView>
 { 
   [SerializeField] private float timeCallExpert;
-  [SerializeField] private StreamerModel prefabStreamerModel;
-  private StreamerModel _streamerModel;
-  
-  public event Action<char> CharInputEvent;
+  //[SerializeField] private StreamerModel prefabStreamerModel;
+
+  //private StreamerModel _streamerModel;
+  [SerializeField] private StreamModelTest prefabStreamerModel;
+  private StreamModelTest _streamerModel;
+
+
+    public event Action<char> CharInputEvent;
 
   public void Initialize() {
       _streamerModel = Object.Instantiate(prefabStreamerModel);
@@ -48,10 +52,5 @@ public class Streamer : ViewOperator<StreamerView>
   public void Disable() {
       view.CallUpEvent -= _streamerModel.CallUp;
       view.HangUpEvent -= _streamerModel.HangUp;
-  }
-  
-  IEnumerator CallExpert() {
-      yield return new WaitForSeconds(timeCallExpert);
-     // HangUpEvent?.Invoke();
   }
 }

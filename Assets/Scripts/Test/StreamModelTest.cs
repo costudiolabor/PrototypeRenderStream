@@ -3,8 +3,9 @@ using System.Collections;
 using UnityEngine;
 using Unity.RenderStreaming;
 
-public class StreamerModel : MonoBehaviour
+public class StreamModelTest : MonoBehaviour
 {
+
 #pragma warning disable 0649
     [SerializeField] private RenderStreaming renderStreaming;
     [SerializeField] private SingleConnection singleConnection;
@@ -14,103 +15,123 @@ public class StreamerModel : MonoBehaviour
     [SerializeField] private AudioStreamSender microphoneStreamer;
     [SerializeField] private AudioSource receiveAudioSource;
     [SerializeField] private InputReceiver inputReceiver;
-    //[SerializeField] private InputSenderData inputSenderData;
-    
+    [SerializeField] private InputSender inputSender;
+    [SerializeField] private InputReceiverData inputReceiverData;
+
+
 #pragma warning restore 0649
-    
+
     [SerializeField] private string connectionId;
     [SerializeField] private int dialTime;
-    [SerializeField] private InputSender inputSender;
-    
+
     private Vector2Int _screenSize;
     private InputKeyBoard _inputKeyBoard;
     private Coroutine _refCallExpert;
 
     public event Action<Texture> OnUpdateReceiveTextureEvent, OnUpdateLocalTextureEvent;
     public event Action<char> CharInputEvent;
-    public event Action<string>  OnStoppedInputReceiverEvent, OnStartInputReceiverEvent;
-    
+    public event Action<string> OnStoppedInputReceiverEvent, OnStartInputReceiverEvent;
+
     public void Awake()
     {
         SetVideoStreamSize();
-        
+
         _inputKeyBoard = new InputKeyBoard();
         _inputKeyBoard.Initialize(inputReceiver);
         _inputKeyBoard.CharInputEvent += context => CharInputEvent?.Invoke(context);
-        
+
         receiveVideoViewer.OnUpdateReceiveTexture += texture => OnUpdateReceiveTextureEvent?.Invoke(texture);
         //receiveVideoViewer.OnStartedStream += id => { inputReceiver.OnStartedChannel += OnStartedChannel;};
         receiveAudioViewer.targetAudioSource = receiveAudioSource;
 
-        receiveAudioViewer.OnUpdateReceiveAudioSource += source => {
+        receiveAudioViewer.OnUpdateReceiveAudioSource += source =>
+        {
             source.loop = true;
             source.Play();
         };
     }
-    
-    void Start() {
+
+    void Start()
+    {
         if (renderStreaming.runOnAwake)
             return;
         renderStreaming.Run();
-        
-        //inputSenderData.OnStartedChannel += id =>
-        //{
-        //    Debug.Log("StartInputSenderData " + id);
-        //    StartCoroutine(SendMessage());
-        //};
 
-        
-        inputReceiver.OnStartedChannel += OnStartedChannel;
+        inputReceiver.OnStartedChannel += id =>
+        {
+            Debug.Log("StartInputReceiver " + id);
+            OnStartedChannel(id);
+        };
+
+        inputSender.OnStartedChannel += id =>
+        {
+            Debug.Log("StartInputSender " + id);
+            StartCoroutine(SendMessage());
+        };
+
+        inputReceiverData.OnStartedChannel += id =>
+        {
+            inputReceiverData.OnMessageEvent += bytes =>
+            {
+                Debug.Log(bytes);
+            };
+
+        };
     }
 
-    private void SetVideoStreamSize() {
+
+    private void SetVideoStreamSize()
+    {
         var scaleResolution = videoStreamSender.scaleResolutionDown;
         _screenSize = new Vector2Int((int)(Screen.width / scaleResolution), (int)(Screen.height / scaleResolution));
         videoStreamSender.width = (uint)_screenSize.x;
         videoStreamSender.height = (uint)_screenSize.y;
     }
-    
-    private void OnStartedChannel(string channelId) {
+
+    private void OnStartedChannel(string channelId)
+    {
         Rect rect = new Rect(0, 0, _screenSize.x, _screenSize.y);
         inputReceiver.SetInputRange(new Vector2Int(_screenSize.x, _screenSize.y), rect);
         inputReceiver.SetEnableInputPositionCorrection(true);
     }
-    
-    public void CallUp() {
+
+    public void CallUp()
+    {
         videoStreamSender.enabled = true;
         microphoneStreamer.enabled = true;
         singleConnection.CreateConnection(connectionId);
         inputReceiver.OnStartedChannel += OnStartedInputReceiver;
         inputReceiver.OnStoppedChannel += OnStoppedInputReceiver;
-        
+
     }
-   
-    public void HangUp() {
+
+    public void HangUp()
+    {
         singleConnection.DeleteConnection(connectionId);
         inputReceiver.OnStartedChannel -= OnStartedInputReceiver;
         inputReceiver.OnStoppedChannel -= OnStoppedInputReceiver;
     }
 
-    private void OnStartedInputReceiver(string id) {
+    private void OnStartedInputReceiver(string id)
+    {
         OnStartInputReceiverEvent?.Invoke(id);
     }
-    
-    private void OnStoppedInputReceiver(string id) {
+
+    private void OnStoppedInputReceiver(string id)
+    {
         OnStoppedInputReceiverEvent?.Invoke(id);
     }
 
-    IEnumerator SendMessage() {
-        // MessageData messageData = new MessageData();
-        // messageData.id = 123456;
-        //
+    IEnumerator SendMessage()
+    {
+        MessageData messageData = new MessageData();
+        messageData.id = 123456;
+        var message = JsonUtility.ToJson(messageData);
+
         // while (true) {
-              yield return new WaitForSeconds(1.0f);
-        //      var message = JsonUtility.ToJson(messageData);
-        //             inputSenderData.Send(message);
+        //yield return new WaitForSeconds(1.0f);
+        yield return null;
+        inputSender.Send(message);
         // }
-       
     }
-    
 }
-
-

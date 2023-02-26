@@ -19,7 +19,7 @@ namespace Unity.RenderStreaming.Samples
         [SerializeField] private AudioStreamSender microphoneStreamer;
         [SerializeField] private AudioStreamReceiver receiveAudioViewer;
         [SerializeField] private SingleConnection singleConnection;
-        [SerializeField] private InputReceiver inputReceiver;
+       // [SerializeField] private InputReceiver inputReceiver;
 
 
 #pragma warning restore 0649
@@ -71,7 +71,7 @@ namespace Unity.RenderStreaming.Samples
             if (renderStreaming.runOnAwake)
                 return;
             renderStreaming.Run(signaling: settings?.Signaling);
-            inputReceiver.OnStartedChannel += OnStartedChannel;
+           // inputReceiver.OnStartedChannel += OnStartedChannel;
         }
         
         void OnUpdateReceiveTexture(Texture texture)
@@ -80,8 +80,8 @@ namespace Unity.RenderStreaming.Samples
         }
         private void OnStartedChannel(string connectionId)
         {
-            inputReceiver.SetInputRange(new Vector2Int((int)videoStreamSender.width, (int)videoStreamSender.height));
-            inputReceiver.SetEnableInputPositionCorrection(true);
+           // inputReceiver.SetInputRange(new Vector2Int((int)videoStreamSender.width, (int)videoStreamSender.height));
+           // inputReceiver.SetEnableInputPositionCorrection(true);
         }
 
         private void SetUp()

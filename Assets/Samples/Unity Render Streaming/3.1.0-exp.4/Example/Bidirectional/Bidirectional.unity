@@ -351,8 +351,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 375413529}
   m_HandleRect: {fileID: 375413528}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4527,16 +4527,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderStreaming: {fileID: 1915034402}
-  webcamSelectDropdown: {fileID: 1859585770}
-  microphoneSelectDropdown: {fileID: 2125586392}
   startButton: {fileID: 1013695940}
   setUpButton: {fileID: 346362251}
   hangUpButton: {fileID: 2128695120}
-  connectionIdInput: {fileID: 185332756}
   localVideoImage: {fileID: 1363584101}
   remoteVideoImage: {fileID: 1221238573}
   receiveAudioSource: {fileID: 1221238575}
-  webCamStreamer: {fileID: 1915034404}
+  videoStreamSender: {fileID: 1915034404}
   receiveVideoViewer: {fileID: 1915034405}
   microphoneStreamer: {fileID: 1363584104}
   receiveAudioViewer: {fileID: 1915034408}
@@ -4553,7 +4550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 045786cf504bd7347842d6948241cbd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  urlSignaling: ws://10.240.38.24
+  urlSignaling: ws://192.168.8.137
   signalingType: Unity.RenderStreaming.Signaling.WebSocketSignaling
   iceServers:
   - credential: 
@@ -4598,7 +4595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TextureSize: {x: 1280, y: 720}
-  m_Source: 2
+  m_Source: 1
   m_Camera: {fileID: 0}
   m_Texture: {fileID: 0}
   m_WebCamDeviceIndex: 0

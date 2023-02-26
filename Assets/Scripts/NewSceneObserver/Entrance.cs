@@ -11,13 +11,13 @@ public class Entrance : MonoBehaviour, IDisposable
 
     private  void Awake() {
         Application.targetFrameRate = frameRate;
-        
-        screenShotHandler.Initialize();
-        graphicEditor.Initialize();
-        gallery.Initialize();
+
+        //screenShotHandler.Initialize();
+       // graphicEditor.Initialize();
+       // gallery.Initialize();
         streamer.Initialize();
         
-        SubscribeEvent();
+      //  SubscribeEvent();
     }
     
     private void StartEditProcess() {
