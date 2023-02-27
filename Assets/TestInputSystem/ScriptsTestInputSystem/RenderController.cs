@@ -72,6 +72,12 @@ public class RenderController : MonoBehaviour
         inputReceiver.OnStartedChannel += OnStartedChannel;
     }
 
+    public void SetConnectId(string id)
+    {
+        connectionId = id;
+    }
+
+
     void OnStartedChannelSender(string connectionId)
     {
         SetInputChange();
@@ -107,8 +113,8 @@ public class RenderController : MonoBehaviour
         videoStreamSender.enabled = true;
         videoStreamReceiver.enabled = true;
 
-        StartButton.interactable = false;
-        EndButton.interactable = true;
+       // StartButton.interactable = false;
+       // EndButton.interactable = true;
 
         singleConnection.CreateConnection(connectionId);
     }
@@ -118,8 +124,8 @@ public class RenderController : MonoBehaviour
         videoStreamSender.enabled = false;
         videoStreamReceiver.enabled = false;
 
-        StartButton.interactable = true;
-        EndButton.interactable = false;
+       // StartButton.interactable = true;
+       // EndButton.interactable = false;
 
         singleConnection.DeleteConnection(connectionId);
     }

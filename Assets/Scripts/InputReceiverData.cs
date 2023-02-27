@@ -6,6 +6,5 @@ public class InputReceiverData : DataChannelBase {
     
     protected override void OnMessage(byte[] bytes) {
          OnMessageEvent?.Invoke(bytes);
-         //Debug.Log(System.Text.Encoding.UTF8.GetString(bytes));
     }
 }

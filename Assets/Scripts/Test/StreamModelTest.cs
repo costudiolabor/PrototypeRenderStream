@@ -125,7 +125,7 @@ public class StreamModelTest : MonoBehaviour
     IEnumerator SendMessage()
     {
         MessageData messageData = new MessageData();
-        messageData.id = 123456;
+       // messageData.id = 123456;
         var message = JsonUtility.ToJson(messageData);
 
         // while (true) {
