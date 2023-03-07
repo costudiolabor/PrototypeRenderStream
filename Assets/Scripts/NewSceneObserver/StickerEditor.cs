@@ -24,7 +24,7 @@ public class StickerEditor
        Sticker sticker = Object.Instantiate(prefabSticker, _linesParent);
        sticker.Initialize();
        sticker.SetPosition(rectPoint);
-       sticker.SetColorImage(_color);
+       sticker.SetColor(_color);
        sticker.SetCountText(_stickers.Count + 1);
        sticker.DeleteStickerEvent += DeleteSticker;
        sticker.OpenStickerEvent += OpenStickerEvent;

@@ -43,7 +43,8 @@ namespace PaintEditor
         
         public Vector3 RayFromARCamera(Vector3 touchPosition)
         {
-            _isHitRayCast = _rayCastManager.Raycast(new Vector2(touchPosition.x, touchPosition.y), _raycastHits, TrackableType.PlaneWithinPolygon);
+            _isHitRayCast = _rayCastManager.Raycast(new Vector2(touchPosition.x, touchPosition.y), _raycastHits, TrackableType.Planes);
+            //_isHitRayCast = _rayCastManager.Raycast(new Vector2(touchPosition.x, touchPosition.y), _raycastHits, TrackableType.FeaturePoint);
             return _isHitRayCast ?_raycastHits[0].pose.position : new Vector3(0,0,0);
         }
     }

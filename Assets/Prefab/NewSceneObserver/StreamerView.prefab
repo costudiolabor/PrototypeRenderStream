@@ -446,8 +446,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   closeTrigger: disappear
-  callUpButton: {fileID: 5924564299171434454}
-  hangUpButton: {fileID: 5924564300579879946}
   localVideoImage: {fileID: 5924564300339752430}
   remoteVideoImage: {fileID: 5924564299958547102}
   buttonCloseOpenImage: {fileID: 5945345388137177824}
@@ -549,7 +547,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5924564299171434449
 RectTransform:
   m_ObjectHideFlags: 0
@@ -893,7 +891,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5924564300579879989
 RectTransform:
   m_ObjectHideFlags: 0

@@ -3,14 +3,11 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Threading;
-using System.Threading.Tasks;
-using Cysharp.Threading.Tasks;
 
 public class StreamerView : AnimatedView
 {
-    [SerializeField] private Button callUpButton;
-    [SerializeField] private Button hangUpButton;
+    //[SerializeField] private Button callUpButton;
+    //[SerializeField] private Button hangUpButton;
     [SerializeField] private RawImage localVideoImage;
     [SerializeField] private RawImage remoteVideoImage;
     [SerializeField] private Button buttonCloseOpenImage;
@@ -32,13 +29,13 @@ public class StreamerView : AnimatedView
     }
 
     private void Awake() {
-        callUpButton.onClick.AddListener(() => CallUpEvent?.Invoke());
-        hangUpButton.onClick.AddListener(() => HangUpEvent?.Invoke());
+        //callUpButton.onClick.AddListener(() => CallUpEvent?.Invoke());
+        //hangUpButton.onClick.AddListener(() => HangUpEvent?.Invoke());
         buttonCloseOpenImage.onClick.AddListener(CloseOpenRemoveImage); 
-        callUpButton.gameObject.SetActive(true);
-        hangUpButton.gameObject.SetActive(false); 
-        CallUpEvent += OnCallUp;
-        HangUpEvent += OnHangUp;
+        //callUpButton.gameObject.SetActive(true);
+       // hangUpButton.gameObject.SetActive(false); 
+        CallUpEvent += CallUp;
+        HangUpEvent += HangUp;
     }
 
     private void  CloseOpenRemoveImage() {
@@ -55,26 +52,26 @@ public class StreamerView : AnimatedView
     }
     
     public void StoppedInputReceiver(string id) {
-        OnHangUp();
+        HangUp();
         SetNotice("Абонент не отвечает \n\n ID: " + id);
     }
 
-    private void OnCallUp() {
-        callUpButton.gameObject.SetActive(false);
-        hangUpButton.gameObject.SetActive(true);
+    private void CallUp() {
+        //callUpButton.gameObject.SetActive(false);
+        //hangUpButton.gameObject.SetActive(true);
         panelNotice.gameObject.SetActive(false);
         Connect();
     }
     
-    private void OnHangUp() {
-        callUpButton.gameObject.SetActive(true);
-        hangUpButton.gameObject.SetActive(false); 
+    private void HangUp() {
+        //callUpButton.gameObject.SetActive(true);
+        //hangUpButton.gameObject.SetActive(false); 
         Disconnect();
         SetNotice("Абонент не отвечает");
     }
 
     private void Connect() {
-        //audioCallExpert.Play();
+        audioCallExpert.Play();
         _refCallExpert = StartCoroutine(CallExpert()) ;
     }
 

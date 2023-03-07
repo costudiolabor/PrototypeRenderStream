@@ -8,10 +8,11 @@ public class UiController
 
     public event Action ClickButtonDeleteEvent;
 
-    public UiController(ViewBasic viewBasic)
+    public void Init(ViewBasic viewBasic)
     {
         //Debug.Log("UiController");
-        viewBasic.ClickButtonDeleteEvent += ButtonClickDelete;
+        this.viewBasic = viewBasic;
+        this.viewBasic.ClickButtonDeleteEvent += ButtonClickDelete;
     }
 
     private void ButtonClickDelete()

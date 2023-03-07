@@ -30,7 +30,8 @@ public class Entry : MonoBehaviour
         drawerFigure = new DrawerFigure();
         drawerFigure.Init(Camera.main, rayCastManager);
 
-        uiController = new UiController(viewBasic);
+        uiController = new UiController();
+        uiController.Init(viewBasic);
         uiController.ClickButtonDeleteEvent += drawerFigure.DeleteFigure;
         _inputManager.StartTouchEvent += drawerFigure.StartTouch;
         _inputManager.CancelTouchEvent += drawerFigure.CancelTouch;

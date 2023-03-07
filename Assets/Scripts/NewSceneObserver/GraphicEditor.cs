@@ -9,7 +9,7 @@ public class GraphicEditor : ViewOperator<GraphicEditorView>, IDisposable {
     [SerializeField] private Screenshot screenshotPrefab;
 
     private  Screenshot _screenshot;
-    private Vector2Int _screenSize;
+    //private Vector2Int _screenSize;
     private Color _color;
     protected float width;
     protected UniTaskCompletionSource<Texture> _taskCompletionSource;
@@ -103,7 +103,7 @@ public class GraphicEditor : ViewOperator<GraphicEditorView>, IDisposable {
         view.LineSelectedEvent += OnLineSelect;
         view.StickerSelectedEvent += OnStickerSelect;
         view.colorMenu.ColorChangedEvent += SetColor;
-        editors.stickerEditor.OpenStickerEvent += OpenPopupDescriptionSticker;
+        //editors.stickerEditor.OpenStickerEvent += OpenPopupDescriptionSticker;
     }
 
     private void UnsubscribeUIEvents(){
@@ -114,7 +114,7 @@ public class GraphicEditor : ViewOperator<GraphicEditorView>, IDisposable {
         view.UndoEvent -= editors.Undo;
         view.RejectClickedEvent -= OnReject;
         view.colorMenu.ColorChangedEvent -= SetColor;
-        editors.stickerEditor.OpenStickerEvent -= OpenPopupDescriptionSticker;
+       // editors.stickerEditor.OpenStickerEvent -= OpenPopupDescriptionSticker;
     }
 
     private void SubscribeDragEvents(){

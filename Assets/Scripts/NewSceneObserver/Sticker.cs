@@ -22,7 +22,7 @@ public class Sticker : MonoBehaviour
    
    public void SetPosition(Vector2 rectPoint) => _rectTransform.localPosition = rectPoint;
 
-   public void SetColorImage(Color color) => _sampleImage.color = color;
+   public void SetColor(Color color) => _sampleImage.color = color;
 
    public void SetCountText(int count) => countText.text = count.ToString();
 

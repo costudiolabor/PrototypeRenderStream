@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 using Unity.RenderStreaming;
 
@@ -14,13 +13,12 @@ public class StreamerModel : MonoBehaviour
     [SerializeField] private AudioStreamSender microphoneStreamer;
     [SerializeField] private AudioSource receiveAudioSource;
     [SerializeField] private InputReceiver inputReceiver;
-    //[SerializeField] private InputSenderData inputSenderData;
     
 #pragma warning restore 0649
     
     [SerializeField] private string connectionId;
-    [SerializeField] private int dialTime;
-    [SerializeField] private InputSender inputSender;
+    //[SerializeField] private int dialTime;
+    //[SerializeField] private InputSender inputSender;
     
     private Vector2Int _screenSize;
     private InputKeyBoard _inputKeyBoard;
@@ -48,18 +46,15 @@ public class StreamerModel : MonoBehaviour
         };
     }
     
+    public void SetConnectId(string id)
+    {
+        connectionId = id;
+    }
+    
     void Start() {
         if (renderStreaming.runOnAwake)
             return;
         renderStreaming.Run();
-        
-        //inputSenderData.OnStartedChannel += id =>
-        //{
-        //    Debug.Log("StartInputSenderData " + id);
-        //    StartCoroutine(SendMessage());
-        //};
-
-        
         inputReceiver.OnStartedChannel += OnStartedChannel;
     }
 
@@ -98,19 +93,6 @@ public class StreamerModel : MonoBehaviour
     private void OnStoppedInputReceiver(string id) {
         OnStoppedInputReceiverEvent?.Invoke(id);
     }
-
-    IEnumerator SendMessage() {
-        // MessageData messageData = new MessageData();
-        // messageData.id = 123456;
-        //
-        // while (true) {
-              yield return new WaitForSeconds(1.0f);
-        //      var message = JsonUtility.ToJson(messageData);
-        //             inputSenderData.Send(message);
-        // }
-       
-    }
-    
 }
 
 

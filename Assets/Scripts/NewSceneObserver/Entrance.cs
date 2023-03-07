@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class Entrance : MonoBehaviour, IDisposable
 {
-    [SerializeField] private int frameRate = 100; 
+    [SerializeField] private int frameRate = 100;
     [SerializeField] private Streamer streamer;
+    [SerializeField] private HandlerMessage handlerMessage;
     [SerializeField] private ScreenShotHandler screenShotHandler;
     [SerializeField] private GraphicEditor graphicEditor;
     [SerializeField] private Gallery gallery;
@@ -12,12 +13,14 @@ public class Entrance : MonoBehaviour, IDisposable
     private  void Awake() {
         Application.targetFrameRate = frameRate;
 
-        //screenShotHandler.Initialize();
-       // graphicEditor.Initialize();
-       // gallery.Initialize();
+        screenShotHandler.Initialize();
+        graphicEditor.Initialize();
+        gallery.Initialize();
         streamer.Initialize();
+        HandlerMessageModel handlerMessageModel = streamer.GetHandlerMessageModel();
+        handlerMessage.Initialize(handlerMessageModel);
         
-      //  SubscribeEvent();
+       SubscribeEvent();
     }
     
     private void StartEditProcess() {
