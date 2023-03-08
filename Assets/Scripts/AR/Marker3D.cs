@@ -1,11 +1,13 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using TMPro;
 
 
 public class Marker3D : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] private TextMesh textCount;
+    //[SerializeField] private TextMesh textCount;
+    [SerializeField] private TMP_Text textCount;
     [SerializeField] private MeshRenderer meshRenderer;
     private Camera _camera;
     private string _description;
