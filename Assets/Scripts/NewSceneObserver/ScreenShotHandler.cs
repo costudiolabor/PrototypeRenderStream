@@ -3,16 +3,16 @@ using System;
 [Serializable]
 public class ScreenShotHandler : ViewOperator<ScreenShotView>
 {
-    public event Action PointerDownEvent;
-    public void Initialize(){
-        base.CreateView();
-        view.Open();
+    //public event Action PointerDownEvent;
+    //public void Initialize(){
+    //    base.CreateView();
+    //    view.Open();
 
-        view.PointerDownEvent += PointerDown;
-    }
+    //   //view.PointerDownEvent += PointerDown;
+    //}
 
-    private void PointerDown() {
-        PointerDownEvent?.Invoke();
-    }
+    //private void PointerDown() {
+    //    PointerDownEvent?.Invoke();
+    //}
     
 }

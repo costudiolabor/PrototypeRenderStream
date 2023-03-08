@@ -15,6 +15,18 @@ public class HandlerMessage : ViewOperator<HandlerMessageView>
         _handlerMessageModel.Initialize();
     }
 
+    public void ViewOpen()
+    {
+        view.Open();
+    }
+
+    public void ViewClose()
+    {
+        view.ForceClose();
+    }
+
+
+
     private void SubscribeEvent() {
         _handlerMessageModel.SendEvent += view.Send;
         _handlerMessageModel.LocalIdEvent += view.SetLocalId;

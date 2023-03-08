@@ -5,14 +5,14 @@ using UnityEngine;
 public class Editors  {
      [SerializeField] private LineEditorModel lineEditor;
      //public StickerEditor stickerEditor;
-     [SerializeField] private MarkerEditor markerEditor;
+     //[SerializeField] private MarkerEditor markerEditor;
 
-     private ToolType _selectedTool;
+    private ToolType _selectedTool;
 
     public void Initialize(RectTransform parent) {
           lineEditor.Initialize(parent);
           //stickerEditor.Initialize(parent);
-          markerEditor.Initialize();
+         // markerEditor.Initialize();
      }
      
      public void OnDrag(Vector2 position){
@@ -29,7 +29,7 @@ public class Editors  {
           if (_selectedTool == ToolType.Stickers)
           {
                //stickerEditor.CreateSticker(position);
-               markerEditor.CreateSticker(position);
+               //markerEditor.CreateSticker(position);
           }
                
      }
@@ -53,7 +53,7 @@ public class Editors  {
      
      public void SetColor(Color color){
           //stickerEditor.SetColor(color);
-          markerEditor.SetColor(color);
+          //markerEditor.SetColor(color);
           lineEditor.SetColor(color);
      }
      
@@ -65,7 +65,7 @@ public class Editors  {
      public void Clear()
      {
         //stickerEditor.Clear();
-        markerEditor.Clear();
+        //markerEditor.Clear();
         lineEditor.Clear();
      }
 }

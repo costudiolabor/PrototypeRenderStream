@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65826365ad7d9de44b19f0f23a43e821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  renderController: {fileID: 0}
+  renderStreamMain: {fileID: 0}
   connection: {fileID: 6450103765162290398}
   inputSenderData: {fileID: 6450103765162290399}
   inputReceiverData: {fileID: 6450103765162290396}

@@ -73,3 +73,6 @@ MonoBehaviour:
     viewParent: {fileID: 0}
     galleryModel:
       prefabScreenShotImage: {fileID: 9068482902205012532, guid: 82aeaa4f2c38a3a49959ca1e81cd1a28, type: 3}
+  menuMode:
+    prefab: {fileID: 5708184051167155543, guid: 96e638b646ea54b41a3c41dc44f88a39, type: 3}
+    viewParent: {fileID: 0}

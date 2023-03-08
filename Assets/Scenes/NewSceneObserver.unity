@@ -463,7 +463,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &458558716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -508,7 +508,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &607056406
 Transform:
   m_ObjectHideFlags: 0
@@ -628,7 +628,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1060074538}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.24, z: -4.5}
+  m_LocalPosition: {x: 0, y: 2.24, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -647,6 +647,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5146193}
     - target: {fileID: 1190496904772950514, guid: f9b8f58dabb524042a60fe7fb1447046, type: 3}
+      propertyPath: menuMode.viewParent
+      value: 
+      objectReference: {fileID: 5146193}
+    - target: {fileID: 1190496904772950514, guid: f9b8f58dabb524042a60fe7fb1447046, type: 3}
       propertyPath: streamer.viewParent
       value: 
       objectReference: {fileID: 5146193}
@@ -662,6 +666,14 @@ PrefabInstance:
       propertyPath: screenShotHandler.viewParent
       value: 
       objectReference: {fileID: 5146193}
+    - target: {fileID: 1190496904772950514, guid: f9b8f58dabb524042a60fe7fb1447046, type: 3}
+      propertyPath: menuMode.markerEditor.prefabMarker3D
+      value: 
+      objectReference: {fileID: 5773010026023299421, guid: d3e931842a5ec014384db0083b168782, type: 3}
+    - target: {fileID: 1190496904772950514, guid: f9b8f58dabb524042a60fe7fb1447046, type: 3}
+      propertyPath: menuMode.markerEditor._objectOrientation.offSetDistance
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2450311495752182388, guid: f9b8f58dabb524042a60fe7fb1447046, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -709,10 +721,6 @@ PrefabInstance:
     - target: {fileID: 2450311495752182390, guid: f9b8f58dabb524042a60fe7fb1447046, type: 3}
       propertyPath: m_Name
       value: Entrance
-      objectReference: {fileID: 0}
-    - target: {fileID: 2450311495752182390, guid: f9b8f58dabb524042a60fe7fb1447046, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9b8f58dabb524042a60fe7fb1447046, type: 3}
@@ -867,7 +875,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5734534533885354492, guid: 7fe801c1235ddd643ba16d0a07527e39, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fe801c1235ddd643ba16d0a07527e39, type: 3}
