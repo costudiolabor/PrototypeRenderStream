@@ -72,9 +72,8 @@ MonoBehaviour:
   editor3DMarker:
     prefab: {fileID: 3317756849532095588, guid: d40d6aa27aa971247a218eaf3e933c1f, type: 3}
     viewParent: {fileID: 0}
-    markerEditor:
+    handlerMarker:
       prefabMarker3D: {fileID: 5773010026023299421, guid: d3e931842a5ec014384db0083b168782, type: 3}
       _objectOrientation:
         offSetDistance: 0.1
-      _currentMarker3D: {fileID: 0}
     rayLength: 100

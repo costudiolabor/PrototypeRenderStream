@@ -1,13 +1,10 @@
 using System;
 using UnityEngine;
 
-
-//using component = UnityEngine.Component;
-
 [Serializable]
 public class Editor3DMarker : ViewOperator<Editor3DMarkerView>
 {
-    [SerializeField] private MarkerEditor markerEditor;
+    [SerializeField] private HandlerMarker handlerMarker;
     [SerializeField] private float rayLength = 1000.0f;
     
     private Camera _cameraMain;
@@ -18,9 +15,8 @@ public class Editor3DMarker : ViewOperator<Editor3DMarkerView>
         _cameraMain = Camera.main;
         base.CreateView();
         view.Initialize();
-       // view.Open();
-        markerEditor.Initialize();
-        markerEditor.SelectObjectEvent += view.OpenPanelEditMarker;
+        handlerMarker.Initialize();
+        handlerMarker.SelectObjectEvent += view.OpenPanelEditMarker;
         view.PointerDownEvent += OnPointerDown;
         view.DeleteMarker3DEvent += DeleteMarker;
         view.ColorChangedEvent += SetColor;
@@ -40,7 +36,7 @@ public class Editor3DMarker : ViewOperator<Editor3DMarkerView>
             IMarker3D marker3D = raycastHit.transform.GetComponent<IMarker3D>();
             marker3D.SelectObject();
         }
-        else markerEditor.CreateMarker(position);
+        else handlerMarker.CreateMarker(position);
     }
     
     public RaycastHit RayFromCamera(Vector3 touchPosition) {
@@ -50,16 +46,21 @@ public class Editor3DMarker : ViewOperator<Editor3DMarkerView>
     }
 
     public void SetColor(Color color) {
-        markerEditor.SetColor(color);
+        handlerMarker.SetColor(color);
     }
 
     public void Clear() {
-        markerEditor.Clear();
+        handlerMarker.Clear();
     }
 
     private void DeleteMarker() {
-        markerEditor.DeleteMarker();
+        handlerMarker.DeleteMarker();
         view.Close();
     }
+    
+    public void CharInput(char charInput) {
+        view.SetCharInputField(charInput);
+    }
+
   
 }

@@ -14,6 +14,7 @@ public class Entrance : MonoBehaviour, IDisposable
 
     private  void Awake() {
         Application.targetFrameRate = frameRate;
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
        // screenShotHandler.Initialize();
         graphicEditor.Initialize();
@@ -56,7 +57,8 @@ public class Entrance : MonoBehaviour, IDisposable
     }
 
     private void SubscribeEvent() {
-        streamer.CharInputEvent += graphicEditor.CharInput;
+        //streamer.CharInputEvent += graphicEditor.CharInput;
+        streamer.CharInputEvent += editor3DMarker.CharInput;
         graphicEditor.CloseViewEvent += CloseViews;
         graphicEditor.OpenViewEvent += OpenViews;
         graphicEditor.SaveScreenShotEvent += SaveGallery;
@@ -65,7 +67,8 @@ public class Entrance : MonoBehaviour, IDisposable
     }
   
     private void UnsubscribeEvents() {
-        streamer.CharInputEvent -= graphicEditor.CharInput;
+        //streamer.CharInputEvent -= graphicEditor.CharInput;
+        streamer.CharInputEvent -= editor3DMarker.CharInput;
         graphicEditor.CloseViewEvent -= CloseViews;
         graphicEditor.OpenViewEvent -= OpenViews;
         graphicEditor.SaveScreenShotEvent -= SaveGallery;

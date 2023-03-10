@@ -72,12 +72,12 @@ public class StreamerView : AnimatedView
 
     private void Connect() {
         audioCallExpert.Play();
-        _refCallExpert = StartCoroutine(CallExpert()) ;
+        //_refCallExpert = StartCoroutine(CallExpert()) ;
     }
 
     private void Disconnect() {
         audioCallExpert.Stop();
-        StopCoroutine(_refCallExpert);
+        //StopCoroutine(_refCallExpert);
     }
     
 

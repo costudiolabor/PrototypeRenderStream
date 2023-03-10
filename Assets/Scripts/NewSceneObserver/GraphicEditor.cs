@@ -58,6 +58,7 @@ public class GraphicEditor : ViewOperator<GraphicEditorView>, IDisposable {
 
     private void OnReject(){
         _taskCompletionSource.TrySetCanceled();
+        OpenViewEvent?.Invoke();
         view.Close();
     }
     

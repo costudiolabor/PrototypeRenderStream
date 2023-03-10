@@ -15,17 +15,13 @@ public class HandlerMessage : ViewOperator<HandlerMessageView>
         _handlerMessageModel.Initialize();
     }
 
-    public void ViewOpen()
-    {
+    public void ViewOpen() {
         view.Open();
     }
 
-    public void ViewClose()
-    {
+    public void ViewClose() {
         view.ForceClose();
     }
-
-
 
     private void SubscribeEvent() {
         _handlerMessageModel.SendEvent += view.Send;
@@ -43,7 +39,7 @@ public class HandlerMessage : ViewOperator<HandlerMessageView>
         view.ResetCallUpEvent += _handlerMessageModel.OnResetCallUp;
     }
     
-    public void Dispose(){
+    public void Dispose() {
         _handlerMessageModel.SendEvent -= view.Send;
         _handlerMessageModel.LocalIdEvent -= view.SetLocalId;
         _handlerMessageModel.SenderStartEvent -= view.SendMessageActive;

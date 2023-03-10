@@ -10,7 +10,7 @@ public class HandlerMessageView : AnimatedView
     [SerializeField] private TMP_Text textInMessage;
     [SerializeField] private TMP_InputField inputMessage;
     [SerializeField] private Button buttonSendMessage;
-    [SerializeField] private GameObject panelButtonCloseCall;
+    [SerializeField] private GameObject panelMainOpenCloseCall;
     [SerializeField] private Button buttonOpenCall;
     [SerializeField] private Button buttonCloseCall;
     [SerializeField] private GameObject panelCallUp;
@@ -73,6 +73,7 @@ public class HandlerMessageView : AnimatedView
           buttonTakeCall.interactable = false;
           string text = $"Соединение\n  ID: {inputId.text}";
           infoComingCall.text = text;
+          panelMainOpenCloseCall.SetActive(true);          
           panelInComingCall.SetActive(false);
           buttonOpenCall.gameObject.SetActive(false);
           buttonCloseCall.gameObject.SetActive(true);
@@ -84,6 +85,7 @@ public class HandlerMessageView : AnimatedView
           infoComingCall.text = text;
           buttonTakeCall.interactable = false;
           buttonResetCall.interactable = false;
+          panelMainOpenCloseCall.SetActive(true);       
           panelInComingCall.SetActive(false);
           ResetCallUpEvent?.Invoke();
       }
@@ -103,6 +105,7 @@ public class HandlerMessageView : AnimatedView
       }
 
       public void InComingCall(string text) {
+          panelMainOpenCloseCall.SetActive(false);          
           infoComingCall.text = text;
           panelInComingCall.SetActive(true);
           buttonTakeCall.interactable = true;

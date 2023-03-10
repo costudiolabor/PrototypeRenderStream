@@ -40,7 +40,7 @@ public class HandlerMessageModel : MonoBehaviour
     
     private async void AsyncStart() {
         await Task.Delay(TimeSpan.FromSeconds(2.0f));
-        Debug.Log("START HandlerMessage");
+       // Debug.Log("START HandlerMessage");
         inputReceiverData.OnMessageEvent += InComingMessage;
         CreateLocalConnection();
         
@@ -77,7 +77,7 @@ public class HandlerMessageModel : MonoBehaviour
     }
     
     private void InComingCall(MessageData messageData) {
-        string text = $"Входящий вызов\n от {messageData.id}";
+        string text = $"{messageData.id}";
         tempRemoteId = messageData.roomId;
         InComingEvent?.Invoke(text);
     }
@@ -134,7 +134,7 @@ public class HandlerMessageModel : MonoBehaviour
         {
             await Task.Yield();
         }
-        Debug.Log("Данные пошли");
+       //Debug.Log("Данные пошли");
         inputSenderData.Send(message);
         SendEvent?.Invoke();
     }

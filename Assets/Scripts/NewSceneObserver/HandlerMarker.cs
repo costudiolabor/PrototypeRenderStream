@@ -4,7 +4,7 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 
 [Serializable]
-public class MarkerEditor
+public class HandlerMarker
 {
     [SerializeField] private Marker3D prefabMarker3D;
     [SerializeField] private ObjectOrientation _objectOrientation;
@@ -12,7 +12,7 @@ public class MarkerEditor
     private Color _color = Color.red;
     private Marker3D _currentMarker3D;
 
-    public event Action SelectObjectEvent;
+    public event Action<Marker3D> SelectObjectEvent;
 
     public void Initialize() {
         _objectOrientation = new ObjectOrientation();
@@ -32,13 +32,13 @@ public class MarkerEditor
         marker3D.SelectObjectEvent += SelectMarker3D;
         marker3D.SetPosition(positionMarker);
         marker3D.SetColor(_color);
-        marker3D.SetCountText(_markers3D.Count + 1);
+        marker3D.SetCount(_markers3D.Count + 1);
         _markers3D.Add(marker3D);
     }
 
     private void SelectMarker3D(Marker3D marker3D) {
         _currentMarker3D = marker3D;
-        SelectObjectEvent?.Invoke();
+        SelectObjectEvent?.Invoke(marker3D);
     }
     
     
@@ -52,7 +52,7 @@ public class MarkerEditor
     private void CalculateCountMarker() {
         for(int i = 0 ; i < _markers3D.Count; i++)
         {
-            _markers3D[i].SetCountText(i + 1);
+            _markers3D[i].SetCount(i + 1);
         }
     }
 

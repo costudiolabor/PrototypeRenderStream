@@ -5,7 +5,7 @@ using UnityEngine;
 public class Editors  {
      [SerializeField] private LineEditorModel lineEditor;
      //public StickerEditor stickerEditor;
-     //[SerializeField] private MarkerEditor markerEditor;
+     //[SerializeField] private HandlerMarker markerEditor;
 
     private ToolType _selectedTool;
 

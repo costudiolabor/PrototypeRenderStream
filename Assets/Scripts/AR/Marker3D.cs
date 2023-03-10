@@ -9,8 +9,8 @@ public class Marker3D : MonoBehaviour, IMarker3D
     [SerializeField] private TMP_Text textCount;
     [SerializeField] private MeshRenderer meshRenderer;
     private Camera _camera;
-    private string _description;
-    private string _textMarker = "";
+    private string _description = "";
+   // private string _textMarker = "";
     
     public event Action<Marker3D> SelectObjectEvent;
 
@@ -21,7 +21,7 @@ public class Marker3D : MonoBehaviour, IMarker3D
     
     public void SetColor(Color color) => meshRenderer.material.color = color;
 
-    public void SetCountText(int count)
+    public void SetCount(int count)
     {
         textCount.text = count.ToString();
     }
@@ -31,7 +31,7 @@ public class Marker3D : MonoBehaviour, IMarker3D
         _camera = camera;
     }
 
-    public void SetDescriptionText(string description)
+    public void SetDescription(string description)
     {
         _description = description;
     }
@@ -40,24 +40,13 @@ public class Marker3D : MonoBehaviour, IMarker3D
     {
         return _description;
     }
-    
-    public void SetTextSticker(string textMarker) {
-        _textMarker = textMarker;
-    }
-   
-    public string GetTextSticker() {
-        return _textMarker;
+
+    private void Update() {
+        if (_camera)transform.LookAt(_camera.transform);
     }
 
-    // private void Update()
-    // {
-    //     if (_camera)transform.LookAt(_camera.transform);
-    // }
 
-
-    public void SelectObject()
-    {
+    public void SelectObject() {
         SelectObjectEvent?.Invoke(this);
-        //Debug.Log("ClickObject");
     }
 }
