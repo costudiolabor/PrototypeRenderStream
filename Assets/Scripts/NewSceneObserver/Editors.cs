@@ -28,8 +28,8 @@ public class Editors  {
      public void OnPointerDown(Vector2 position){
           if (_selectedTool == ToolType.Stickers)
           {
-               //stickerEditor.CreateSticker(position);
-               //markerEditor.CreateSticker(position);
+               //stickerEditor.CreateMarker(position);
+               //markerEditor.CreateMarker(position);
           }
                
      }

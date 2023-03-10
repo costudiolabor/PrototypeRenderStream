@@ -52,9 +52,6 @@ MonoBehaviour:
   handlerMessage:
     prefab: {fileID: 4638664089787448753, guid: ac0e9d98825ce944b8600389700a8036, type: 3}
     viewParent: {fileID: 0}
-  screenShotHandler:
-    prefab: {fileID: -156067987382473402, guid: 5b70941cbe0f4ac4dbc02fb1a3f7108c, type: 3}
-    viewParent: {fileID: 0}
   graphicEditor:
     prefab: {fileID: 9043596416726735273, guid: 9e33c9a3e4124ef4681bb725211bea8e, type: 3}
     viewParent: {fileID: 0}
@@ -63,10 +60,6 @@ MonoBehaviour:
         lineFactory:
           linePrefab: {fileID: 56282802960156226, guid: bab61ff5661a84c4fb4e82b88051cafc, type: 3}
           arrowPrefab: {fileID: 6204102368723038970, guid: e29d42d39528008458f41a9f6f0bb8d7, type: 3}
-      markerEditor:
-        prefabMarker3D: {fileID: 5773010026023299421, guid: d3e931842a5ec014384db0083b168782, type: 3}
-        _objectOrientation:
-          offSetDistance: 0.2
     screenshotPrefab: {fileID: 1608640987172346434, guid: 26d9fcd74cca1134194fc903c354eca0, type: 3}
   gallery:
     prefab: {fileID: 4890711307926743645, guid: a82c1741726e9524d92110209385ae3c, type: 3}
@@ -76,3 +69,12 @@ MonoBehaviour:
   menuMode:
     prefab: {fileID: 5708184051167155543, guid: 96e638b646ea54b41a3c41dc44f88a39, type: 3}
     viewParent: {fileID: 0}
+  editor3DMarker:
+    prefab: {fileID: 3317756849532095588, guid: d40d6aa27aa971247a218eaf3e933c1f, type: 3}
+    viewParent: {fileID: 0}
+    markerEditor:
+      prefabMarker3D: {fileID: 5773010026023299421, guid: d3e931842a5ec014384db0083b168782, type: 3}
+      _objectOrientation:
+        offSetDistance: 0.1
+      _currentMarker3D: {fileID: 0}
+    rayLength: 100

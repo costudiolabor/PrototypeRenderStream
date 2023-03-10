@@ -65,6 +65,7 @@ MonoBehaviour:
   microphoneStreamer: {fileID: 8958509712471974138}
   receiveAudioSource: {fileID: 3254192184068737614}
   inputReceiver: {fileID: 1181912756816870776}
+  urlServer: ws://10.240.38.24
   connectionId: 00000
 --- !u!114 &8958509712471974023
 MonoBehaviour:
@@ -78,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 045786cf504bd7347842d6948241cbd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  urlSignaling: ws://192.168.8.137
+  urlSignaling: ws://10.240.38.24
   signalingType: Unity.RenderStreaming.Signaling.WebSocketSignaling
   iceServers:
   - credential: 

@@ -463,7 +463,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &458558716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -508,7 +508,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &607056406
 Transform:
   m_ObjectHideFlags: 0
@@ -544,7 +544,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1060074539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -590,7 +590,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8b041e936d5eb9745a5dfce87a5177c8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -659,21 +659,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5146193}
     - target: {fileID: 1190496904772950514, guid: f9b8f58dabb524042a60fe7fb1447046, type: 3}
+      propertyPath: editor3DMarker.viewParent
+      value: 
+      objectReference: {fileID: 5146193}
+    - target: {fileID: 1190496904772950514, guid: f9b8f58dabb524042a60fe7fb1447046, type: 3}
       propertyPath: handlerMessage.viewParent
       value: 
       objectReference: {fileID: 5146193}
-    - target: {fileID: 1190496904772950514, guid: f9b8f58dabb524042a60fe7fb1447046, type: 3}
-      propertyPath: screenShotHandler.viewParent
-      value: 
-      objectReference: {fileID: 5146193}
-    - target: {fileID: 1190496904772950514, guid: f9b8f58dabb524042a60fe7fb1447046, type: 3}
-      propertyPath: menuMode.markerEditor.prefabMarker3D
-      value: 
-      objectReference: {fileID: 5773010026023299421, guid: d3e931842a5ec014384db0083b168782, type: 3}
-    - target: {fileID: 1190496904772950514, guid: f9b8f58dabb524042a60fe7fb1447046, type: 3}
-      propertyPath: menuMode.markerEditor._objectOrientation.offSetDistance
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 2450311495752182388, guid: f9b8f58dabb524042a60fe7fb1447046, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -875,7 +867,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5734534533885354492, guid: 7fe801c1235ddd643ba16d0a07527e39, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fe801c1235ddd643ba16d0a07527e39, type: 3}

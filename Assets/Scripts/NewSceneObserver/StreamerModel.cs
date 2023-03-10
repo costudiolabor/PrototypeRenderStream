@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 using Unity.RenderStreaming;
 
@@ -13,7 +15,6 @@ public class StreamerModel : MonoBehaviour
     [SerializeField] private AudioStreamSender microphoneStreamer;
     [SerializeField] private AudioSource receiveAudioSource;
     [SerializeField] private InputReceiver inputReceiver;
-    
 #pragma warning restore 0649
     
     [SerializeField] private string connectionId;
@@ -50,14 +51,15 @@ public class StreamerModel : MonoBehaviour
     {
         connectionId = id;
     }
-    
-    void Start() {
+
+    async void Start()
+    {
         if (renderStreaming.runOnAwake)
             return;
         renderStreaming.Run();
         inputReceiver.OnStartedChannel += OnStartedChannel;
     }
-
+    
     private void SetVideoStreamSize() {
         var scaleResolution = videoStreamSender.scaleResolutionDown;
         _screenSize = new Vector2Int((int)(Screen.width / scaleResolution), (int)(Screen.height / scaleResolution));

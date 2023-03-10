@@ -102,4 +102,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 1389008495912883259}
-  offsetDelete: 50
+  offsetDelete: 10

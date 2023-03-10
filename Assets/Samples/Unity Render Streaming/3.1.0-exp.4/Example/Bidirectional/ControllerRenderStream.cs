@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,12 +21,19 @@ namespace Unity.RenderStreaming.Samples
         [SerializeField] private ViewRenderStream _viewRenderStream;
 #pragma warning restore 0649
         
-        private string _connectionId;
+        [SerializeField] private string _connectionId;
         private  RenderStreamingSettings _settings;
-        
+
+        private void Awake()
+        {
+            _viewRenderStream.Init();
+           Init(_viewRenderStream);
+        }
+
+
         public void Init(ViewRenderStream viewRenderStream)
         {
-            _connectionId = "00000";
+            //_connectionId = "00000";
 
             _viewRenderStream = viewRenderStream;
             _viewRenderStream.StartButtonEvent += StartButton;

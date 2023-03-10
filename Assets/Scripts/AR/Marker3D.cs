@@ -4,18 +4,15 @@ using UnityEngine.EventSystems;
 using TMPro;
 
 
-public class Marker3D : MonoBehaviour, IPointerClickHandler
+public class Marker3D : MonoBehaviour, IMarker3D
 {
-    //[SerializeField] private TextMesh textCount;
     [SerializeField] private TMP_Text textCount;
     [SerializeField] private MeshRenderer meshRenderer;
     private Camera _camera;
     private string _description;
     private string _textMarker = "";
     
-    public event Action<Sticker> OpenStickerEvent;
-    public event Action<Sticker> DeleteStickerEvent;
-
+    public event Action<Marker3D> SelectObjectEvent;
 
     public void Initialize() {
     }
@@ -44,10 +41,6 @@ public class Marker3D : MonoBehaviour, IPointerClickHandler
         return _description;
     }
     
-    public void OpenSticker() {
-        //OpenStickerEvent?.Invoke(this);
-    }
-
     public void SetTextSticker(string textMarker) {
         _textMarker = textMarker;
     }
@@ -56,19 +49,15 @@ public class Marker3D : MonoBehaviour, IPointerClickHandler
         return _textMarker;
     }
 
-    private void DeleteSticker() {
-       // DeleteStickerEvent?.Invoke(this);
-        //Destroy(gameObject);
-    }
-    
-    
-    private void Update()
-    {
-        if (_camera)transform.LookAt(_camera.transform);
-    }
+    // private void Update()
+    // {
+    //     if (_camera)transform.LookAt(_camera.transform);
+    // }
 
-    public void OnPointerClick(PointerEventData eventData)
+
+    public void SelectObject()
     {
-        Debug.Log("ClickMarker  " + textCount.text);
+        SelectObjectEvent?.Invoke(this);
+        //Debug.Log("ClickObject");
     }
 }

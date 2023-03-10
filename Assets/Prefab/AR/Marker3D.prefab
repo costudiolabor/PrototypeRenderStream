@@ -218,8 +218,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2520657853970531722}
   - component: {fileID: 5773010026023299421}
+  - component: {fileID: 5953692615001259527}
   m_Layer: 0
-  m_Name: Arrow3D
+  m_Name: Marker3D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -255,6 +256,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textCount: {fileID: 5247405071566072027}
   meshRenderer: {fileID: 3983195751090885815}
+--- !u!65 &5953692615001259527
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2486551330319949852}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.023108423, y: 0.07721464, z: 0.010530233}
+  m_Center: {x: -0.000095872834, y: 0.058419507, z: -0.000039014965}
 --- !u!1 &9030277862211637331
 GameObject:
   m_ObjectHideFlags: 0

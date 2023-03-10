@@ -103,7 +103,7 @@ public class GraphicEditor : ViewOperator<GraphicEditorView>, IDisposable {
         view.LineSelectedEvent += OnLineSelect;
         view.StickerSelectedEvent += OnStickerSelect;
         view.colorMenu.ColorChangedEvent += SetColor;
-        //editors.stickerEditor.OpenStickerEvent += OpenPopupDescriptionSticker;
+        //editors.stickerEditor.SelectObjectEvent += OpenPopupDescriptionSticker;
     }
 
     private void UnsubscribeUIEvents(){
@@ -114,7 +114,7 @@ public class GraphicEditor : ViewOperator<GraphicEditorView>, IDisposable {
         view.UndoEvent -= editors.Undo;
         view.RejectClickedEvent -= OnReject;
         view.colorMenu.ColorChangedEvent -= SetColor;
-       // editors.stickerEditor.OpenStickerEvent -= OpenPopupDescriptionSticker;
+       // editors.stickerEditor.SelectObjectEvent -= OpenPopupDescriptionSticker;
     }
 
     private void SubscribeDragEvents(){

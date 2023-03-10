@@ -10,6 +10,7 @@ public class Entrance : MonoBehaviour, IDisposable
     [SerializeField] private GraphicEditor graphicEditor;
     [SerializeField] private Gallery gallery;
     [SerializeField] private MenuMode menuMode;
+    [SerializeField] private Editor3DMarker editor3DMarker;
 
     private  void Awake() {
         Application.targetFrameRate = frameRate;
@@ -18,9 +19,10 @@ public class Entrance : MonoBehaviour, IDisposable
         graphicEditor.Initialize();
         gallery.Initialize();
         streamer.Initialize();
-        menuMode.Initialize();
         HandlerMessageModel handlerMessageModel = streamer.GetHandlerMessageModel();
         handlerMessage.Initialize(handlerMessageModel);
+        editor3DMarker.Initialize();
+        menuMode.Initialize();
         
        SubscribeEvent();
     }
@@ -30,18 +32,23 @@ public class Entrance : MonoBehaviour, IDisposable
         graphicEditor.OnStart();
     }
 
+    private void SelectMarker3D()
+    {
+        editor3DMarker.ViewOpen();
+    }
+
     private void OpenViews() {
         streamer.ViewOpen();
-        menuMode.ViewOpen();
         handlerMessage.ViewOpen();
+        menuMode.ViewOpen();
     }
 
     private void CloseViews() {
         streamer.ViewClose();
         gallery.ViewClose();
-        menuMode.ViewClose();
         handlerMessage.ViewClose();
-
+        editor3DMarker.ViewClose();
+        menuMode.ViewClose();
     }
 
     private void SaveGallery(Texture texture) {
@@ -50,20 +57,19 @@ public class Entrance : MonoBehaviour, IDisposable
 
     private void SubscribeEvent() {
         streamer.CharInputEvent += graphicEditor.CharInput;
-        //screenShotHandler.PointerDownEvent += StartEditProcess;
-        menuMode.ScreenShotEvent += StartEditProcess;
         graphicEditor.CloseViewEvent += CloseViews;
         graphicEditor.OpenViewEvent += OpenViews;
         graphicEditor.SaveScreenShotEvent += SaveGallery;
+        menuMode.ScreenShotEvent += StartEditProcess;
+        menuMode.SelectMarker3DEvent += SelectMarker3D;
     }
   
     private void UnsubscribeEvents() {
         streamer.CharInputEvent -= graphicEditor.CharInput;
-        // screenShotHandler.PointerDownEvent -= StartEditProcess;
-        menuMode.ScreenShotEvent -= StartEditProcess;
         graphicEditor.CloseViewEvent -= CloseViews;
         graphicEditor.OpenViewEvent -= OpenViews;
         graphicEditor.SaveScreenShotEvent -= SaveGallery;
+        menuMode.ScreenShotEvent -= StartEditProcess;
     }
     
     public void Dispose(){

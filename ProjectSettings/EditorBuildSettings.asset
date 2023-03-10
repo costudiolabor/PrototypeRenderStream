@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/NewSceneObserver.unity
     guid: 0a374f7d062f971498c3afcca31bebbd
   m_configObjects:
